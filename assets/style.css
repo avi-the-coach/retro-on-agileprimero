@@ -323,3 +323,52 @@ body {
   transition: opacity 0.3s ease;
 }
 EOF < /dev/null
+
+/* === ARTICLE LIST STYLING === */
+.article-list {
+  list-style: none;
+  padding: 0;
+  margin: 40px 0;
+}
+
+.article-list li {
+  margin-bottom: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.article-list li:hover {
+  border-color: var(--text-color);
+  background: var(--hover-color);
+}
+
+.article-list a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.article-list .date {
+  font-size: 14px;
+  opacity: 0.7;
+  margin-bottom: 8px;
+  color: var(--text-color);
+}
+
+.article-list .title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  line-height: 1.4;
+}
+
+.article-list .excerpt {
+  font-size: 16px;
+  opacity: 0.8;
+  color: var(--text-color);
+  line-height: 1.6;
+}
+EOF < /dev/null
