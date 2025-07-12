@@ -1,12 +1,27 @@
-/* Clean, readable CSS inspired by Henry Pray's style */
+/* Smart CSS Architecture for Retro Site
+   Centralized theme + language + logo management via CSS custom properties */
+
+/* === CENTRALIZED STATE SYSTEM === */
 :root {
+  /* Base theme variables - Dark theme (default) */
   --bg-color: #000000;
   --text-color: #ffffff;
   --accent-color: #ffffff;
   --border-color: #333333;
   --hover-color: #333333;
+  
+  /* Logo system - Dynamic based on theme + language */
+  --logo-dark-en: url('./white_griffin_black_bg_clean_en.png');
+  --logo-dark-he: url('./white_griffin_black_bg_clean_he.png');
+  --logo-light-en: url('./black_griffin_white_bg_clean_en.png');
+  --logo-light-he: url('./black_griffin_white_bg_clean_he.png');
+  
+  /* Active logo - defaults to dark theme Hebrew */
+  --logo-active: var(--logo-dark-he);
 }
 
+/* === THEME VARIANTS === */
+/* Light theme override */
 [data-theme="light"] {
   --bg-color: #ffffff;
   --text-color: #000000;
@@ -15,6 +30,38 @@
   --hover-color: #f0f0f0;
 }
 
+/* === SMART LOGO SYSTEM === */
+/* Dark theme logos */
+:root[data-lang="en"], [data-theme="dark"][data-lang="en"] {
+  --logo-active: var(--logo-dark-en);
+}
+
+:root[data-lang="he"], [data-theme="dark"][data-lang="he"] {
+  --logo-active: var(--logo-dark-he);
+}
+
+/* Light theme logos */
+[data-theme="light"][data-lang="en"] {
+  --logo-active: var(--logo-light-en);
+}
+
+[data-theme="light"][data-lang="he"] {
+  --logo-active: var(--logo-light-he);
+}
+
+/* === LANGUAGE SYSTEM === */
+/* RTL for Hebrew */
+[data-lang="he"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[data-lang="en"] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* === BASE STYLES === */
 * {
   margin: 0;
   padding: 0;
@@ -30,16 +77,6 @@ body {
   font-size: 16px;
 }
 
-/* RTL Support */
-[dir="rtl"] {
-  direction: rtl;
-  text-align: right;
-}
-
-[dir="rtl"] .terminal-header h1 {
-  text-align: right;
-}
-
 .container {
   max-width: 700px;
   margin: 0 auto;
@@ -47,31 +84,31 @@ body {
   min-height: 100vh;
 }
 
+/* === HEADER SYSTEM === */
 .terminal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 40px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 30px;
-  margin-bottom: 50px;
 }
 
-/* Updated branding section */
 .branding {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
+/* Smart logo implementation */
 .logo {
   height: 50px;
   width: auto;
-  transition: opacity 0.3s ease;
   max-width: 50px;
   object-fit: contain;
+  content: var(--logo-active);
+  transition: opacity 0.3s ease;
 }
-
-/* Remove CSS content approach - let JavaScript handle image swapping */
 
 .company-info h1 {
   font-size: 24px;
@@ -84,211 +121,157 @@ body {
 .company-info .tagline {
   font-size: 14px;
   opacity: 0.7;
-  font-style: italic;
   color: var(--text-color);
-  font-weight: 400;
 }
 
-/* RTL adjustments for branding */
-[dir="rtl"] .branding {
-  flex-direction: row-reverse;
-}
-
-[dir="rtl"] .company-info h1 {
-  text-align: right;
-}
-
-[dir="rtl"] .company-info .tagline {
-  text-align: right;
-}
-
+/* === CONTROLS === */
 .controls {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   align-items: center;
 }
 
-.home-btn, .language-toggle {
-  background: none;
-  border: 1px solid var(--border-color);
+#theme-toggle, #language-toggle {
+  background: var(--bg-color);
   color: var(--text-color);
-  padding: 8px 16px;
-  cursor: pointer;
-  font-family: inherit;
-  text-decoration: none;
-  transition: all 0.2s ease;
-  font-size: 14px;
-  border-radius: 4px;
-}
-
-.home-btn:hover, .language-toggle:hover {
-  background-color: var(--hover-color);
-  border-color: var(--text-color);
-}
-
-#theme-toggle {
   border: 1px solid var(--border-color);
   padding: 8px 12px;
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.2s ease;
   border-radius: 4px;
+  cursor: pointer;
   font-size: 16px;
-  /* Show target theme: opposite of current background */
-  background-color: var(--text-color);
-  color: var(--bg-color);
+  transition: all 0.3s ease;
 }
 
-/* Dark theme (default): button shows white background with black text (light theme preview) */
-#theme-toggle {
-  background-color: #ffffff;
-  color: #000000;
-  border-color: #ffffff;
+#theme-toggle:hover, #language-toggle:hover {
+  background: var(--hover-color);
 }
 
-/* Light theme: button shows black background with white text (dark theme preview) */
-[data-theme="light"] #theme-toggle {
-  background-color: #000000;
-  color: #ffffff;
-  border-color: #000000;
+/* Theme toggle icons */
+[data-theme="dark"] #theme-toggle::before {
+  content: "☀️";
 }
 
-#theme-toggle:hover {
-  opacity: 0.8;
+[data-theme="light"] #theme-toggle::before {
+  content: "🌙";
 }
 
-.content {
-  font-size: 16px;
+/* Language toggle text */
+[data-lang="he"] #language-toggle::before {
+  content: "EN";
 }
 
+[data-lang="en"] #language-toggle::before {
+  content: "עב";
+}
+
+/* === NAVIGATION === */
+.nav-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#home-btn {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+#home-btn:hover {
+  background: var(--hover-color);
+}
+
+/* === CONTENT AREAS === */
 .language-selector {
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 0;
 }
 
 .language-selector h2 {
-  margin-bottom: 40px;
-  font-size: 24px;
-  font-weight: 500;
-  letter-spacing: -0.3px;
+  font-size: 28px;
+  margin-bottom: 30px;
+  font-weight: 600;
 }
 
 .language-options {
   display: flex;
+  gap: 20px;
   justify-content: center;
-  gap: 30px;
+  flex-wrap: wrap;
 }
 
 .language-btn {
   display: inline-block;
-  padding: 16px 32px;
-  border: 1px solid var(--border-color);
-  text-decoration: none;
+  padding: 12px 24px;
+  background: var(--bg-color);
   color: var(--text-color);
-  font-family: inherit;
-  font-size: 16px;
+  border: 2px solid var(--border-color);
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 18px;
   font-weight: 500;
-  transition: all 0.2s ease;
-  border-radius: 4px;
+  transition: all 0.3s ease;
+  min-width: 100px;
 }
 
 .language-btn:hover {
-  background-color: var(--hover-color);
+  background: var(--hover-color);
   border-color: var(--text-color);
 }
 
-.article-list {
-  list-style: none;
+/* === ARTICLE CONTENT === */
+.content {
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.article-list li {
+.article-header {
   margin-bottom: 40px;
-  padding: 30px;
-  border: 1px solid var(--border-color);
-  transition: all 0.2s ease;
-  border-radius: 6px;
+  text-align: center;
 }
 
-.article-list li:hover {
-  background-color: var(--hover-color);
-  border-color: var(--text-color);
-}
-
-.article-list a {
-  text-decoration: none;
-  color: var(--text-color);
-  display: block;
-}
-
-.article-list .date {
-  font-size: 14px;
-  opacity: 0.6;
-  margin-bottom: 8px;
-  font-weight: 500;
-}
-
-.article-list .title {
-  font-size: 20px;
-  margin-bottom: 12px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-}
-
-.article-list .excerpt {
-  font-size: 16px;
-  opacity: 0.8;
-  line-height: 1.5;
-}
-
-/* Article Content Styling */
-.article-content {
-  max-width: 100%;
-  line-height: 1.7;
-}
-
-.article-content h1 {
-  font-size: 36px;
+.article-header h1 {
+  font-size: 32px;
   font-weight: 700;
-  margin-bottom: 20px;
-  line-height: 1.2;
-  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.article-meta {
   color: var(--text-color);
+  opacity: 0.7;
+  font-size: 14px;
+}
+
+.article-content {
+  font-size: 18px;
+  line-height: 1.8;
 }
 
 .article-content h2 {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 600;
-  margin: 50px 0 25px 0;
-  line-height: 1.3;
-  letter-spacing: -0.3px;
+  margin: 40px 0 20px 0;
   color: var(--text-color);
 }
 
 .article-content h3 {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 600;
-  margin: 40px 0 20px 0;
-  line-height: 1.3;
-  letter-spacing: -0.2px;
+  margin: 30px 0 15px 0;
   color: var(--text-color);
 }
 
 .article-content p {
-  margin-bottom: 25px;
-  font-size: 17px;
-  line-height: 1.7;
+  margin-bottom: 20px;
   color: var(--text-color);
-}
-
-.article-content p:first-of-type {
-  font-size: 18px;
-  margin-bottom: 30px;
-}
-
-.article-content em {
-  font-style: italic;
-  opacity: 0.8;
-  font-size: 16px;
 }
 
 .article-content strong {
@@ -297,62 +280,73 @@ body {
 }
 
 .article-content ul, .article-content ol {
-  margin: 25px 0;
+  margin: 20px 0;
   padding-left: 30px;
-  line-height: 1.7;
 }
 
-[dir="rtl"] .article-content ul, 
-[dir="rtl"] .article-content ol {
-  padding-left: 0;
+[data-lang="he"] .article-content ul,
+[data-lang="he"] .article-content ol {
   padding-right: 30px;
+  padding-left: 0;
 }
 
 .article-content li {
-  margin-bottom: 15px;
-  font-size: 17px;
-  line-height: 1.7;
+  margin-bottom: 10px;
   color: var(--text-color);
 }
 
-.article-content ol li {
-  font-weight: 500;
+.article-content blockquote {
+  border-left: 4px solid var(--border-color);
+  padding-left: 20px;
+  margin: 30px 0;
+  font-style: italic;
+  opacity: 0.8;
 }
 
-.article-content hr {
-  border: none;
-  border-top: 1px solid var(--border-color);
-  margin: 60px 0;
+[data-lang="he"] .article-content blockquote {
+  border-left: none;
+  border-right: 4px solid var(--border-color);
+  padding-left: 0;
+  padding-right: 20px;
 }
 
-.nav-back {
-  margin-bottom: 40px;
-  display: inline-block;
-  color: var(--text-color);
-  text-decoration: none;
-  border: 1px solid var(--border-color);
-  padding: 10px 20px;
-  transition: all 0.2s ease;
-  font-size: 14px;
-  border-radius: 4px;
-  font-weight: 500;
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  .terminal-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .controls {
+    justify-content: center;
+  }
+  
+  .language-options {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .article-header h1 {
+    font-size: 28px;
+  }
+  
+  .article-content {
+    font-size: 16px;
+  }
 }
 
-.nav-back:hover {
-  background-color: var(--hover-color);
-  border-color: var(--text-color);
+/* === TRANSITIONS === */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Better spacing for article sections */
-.article-content > p + h2 {
-  margin-top: 60px;
+/* Logo transition handled by CSS content property */
+.logo {
+  transition: content 0.3s ease, opacity 0.3s ease;
 }
-
-.article-content > h2 + p {
-  margin-top: 20px;
-}
-
-/* Ensure text stays visible in both themes */
-.article-content * {
-  color: inherit;
-}
+EOF < /dev/null
