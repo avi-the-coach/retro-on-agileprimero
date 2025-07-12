@@ -1,0 +1,33 @@
+I am writing this cause it is easier to write here a longer prompt
+once you read this you can delete it
+
+the design I wish for the web site is as follow:
+1 - black and white
+the whole website should have 2 optional themes
+black or dark
+in this theme the whole background is black and writing is white
+also the griffin logo is white
+in the light theme the background is white and all writing is black and also logo is black griffin
+the site start with dark theme
+on all pages there is a switch theme button
+when the theme is dark the switch is with white background and icon of a sun
+when clicked the theme change to light and the button is becoming with moon icon and black bacground
+
+
+2 - hebrew and english
+another swich we have is the language
+starting with hebrew where everithing is RTL
+we have English button
+when clicked all page switch to english and page become LTR
+
+magor issue is that the logo also swich file
+we have 4 files to match 
+1 = dark theme - hebrew
+2 = dark theme - english
+3 = light theme - hebrew
+4 = light theme - english
+
+now I would like you to revise the whole structure of the site and come up with a smart design to hendle all this without the need to 
+go over all pages to change somthing in the styles
+obviusly some level of change will require go over all
+but I would like you to come with a smart solution
