@@ -67,22 +67,18 @@ body {
   height: 50px;
   width: auto;
   transition: filter 0.3s ease;
+  max-width: 50px;
+  object-fit: contain;
 }
 
-/* Theme-responsive logo styling */
+/* Simplified theme-responsive logo styling */
 .logo {
-  filter: drop-shadow(2px 2px 4px rgba(128, 128, 128, 0.3));
+  /* Default - no filter for dark theme */
 }
 
-/* Dark theme: make logo white */
-[data-theme="dark"] .logo,
-:root .logo {
-  filter: brightness(0) invert(1) drop-shadow(2px 2px 4px rgba(128, 128, 128, 0.3));
-}
-
-/* Light theme: keep logo black */
+/* Light theme: invert logo to make it dark */
 [data-theme="light"] .logo {
-  filter: brightness(0) drop-shadow(2px 2px 4px rgba(128, 128, 128, 0.3));
+  filter: invert(1);
 }
 
 .company-info h1 {
