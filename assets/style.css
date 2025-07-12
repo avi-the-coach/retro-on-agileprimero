@@ -400,3 +400,57 @@ body {
   transition: opacity 0.3s ease;
 }
 EOF < /dev/null
+
+/* === DEBUGGING STYLES FOR THEME TOGGLE === */
+/* Force buttons to be visible with extreme styling */
+
+#theme-toggle, #language-toggle {
+    /* Force visibility */
+    display: block \!important;
+    visibility: visible \!important;
+    opacity: 1 \!important;
+    
+    /* Make them huge and obvious */
+    width: 60px \!important;
+    height: 40px \!important;
+    background: #ff0000 \!important;
+    color: #ffffff \!important;
+    border: 3px solid #000000 \!important;
+    font-size: 20px \!important;
+    font-weight: bold \!important;
+    
+    /* Remove any transform or positioning issues */
+    transform: none \!important;
+    position: relative \!important;
+    margin: 5px \!important;
+    padding: 5px \!important;
+    
+    /* Ensure they're clickable */
+    cursor: pointer \!important;
+    pointer-events: auto \!important;
+    z-index: 9999 \!important;
+}
+
+/* Debug text instead of icons */
+#theme-toggle::before {
+    content: "SUN" \!important;
+}
+
+#language-toggle::before {
+    content: "עב" \!important;
+}
+
+[data-theme="light"] #theme-toggle::before {
+    content: "MOON" \!important;
+}
+
+[data-lang="en"] #language-toggle::before {
+    content: "EN" \!important;
+}
+
+.controls {
+    background: yellow \!important;
+    padding: 10px \!important;
+    border: 2px solid red \!important;
+}
+EOF < /dev/null
