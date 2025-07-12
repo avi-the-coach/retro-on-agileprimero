@@ -71,14 +71,15 @@ body {
   object-fit: contain;
 }
 
-/* Simplified theme-responsive logo styling */
+/* Theme-responsive logo styling for griffin */
+/* Dark theme (default): Make griffin white */
 .logo {
-  /* Default - no filter for dark theme */
+  filter: brightness(0) invert(1);
 }
 
-/* Light theme: invert logo to make it dark */
+/* Light theme: Make griffin black */
 [data-theme="light"] .logo {
-  filter: invert(1);
+  filter: brightness(0) invert(0);
 }
 
 .company-info h1 {
