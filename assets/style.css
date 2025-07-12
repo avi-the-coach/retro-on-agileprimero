@@ -71,19 +71,19 @@ body {
   object-fit: contain;
 }
 
-/* Theme-responsive logo styling for griffin - More specific selectors */
-/* Dark theme (default): Make griffin white with high specificity */
+/* Better approach - preserve griffin details while changing colors */
+/* Dark theme (default): Make griffin white while preserving details */
 body .logo,
 .branding .logo,
 img.logo {
-  filter: brightness(0) invert(1) !important;
+  filter: invert(1) contrast(200%) !important;
 }
 
-/* Light theme: Make griffin black with high specificity */
+/* Light theme: Keep griffin dark but enhance contrast */
 [data-theme="light"] body .logo,
 [data-theme="light"] .branding .logo,
 [data-theme="light"] img.logo {
-  filter: brightness(0) invert(0) !important;
+  filter: contrast(150%) saturate(0.5) !important;
 }
 
 .company-info h1 {
