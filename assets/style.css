@@ -1,10 +1,10 @@
 /* Terminal-inspired CSS with bilingual support */
 :root {
   --bg-color: #000000;
-  --text-color: #00ff00;
+  --text-color: #ffffff;
   --accent-color: #ffffff;
   --border-color: #333333;
-  --hover-color: #008800;
+  --hover-color: #333333;
 }
 
 [data-theme="light"] {
@@ -64,6 +64,23 @@ body {
 .controls {
   display: flex;
   gap: 10px;
+}
+
+.home-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 5px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.home-btn:hover {
+  background-color: var(--hover-color);
+  color: var(--bg-color);
 }
 
 #theme-toggle {
