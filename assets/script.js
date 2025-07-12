@@ -2,12 +2,15 @@
 // Centralized theme + language + logo coordination via HTML data attributes
 
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing smart state management...');
     
     // === STATE MANAGEMENT ===
     
     // Get saved preferences or defaults
     const savedTheme = localStorage.getItem('theme') || 'dark';
     const savedLang = localStorage.getItem('language') || 'he'; // Hebrew default
+    
+    console.log(`Saved preferences: theme=${savedTheme}, lang=${savedLang}`);
     
     // Apply initial state to HTML element
     function initializeState() {
@@ -73,19 +76,25 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Update logo source with cache busting
-            const newSrc = `${assetPath}${logoFile}?v=17`;
+            const newSrc = `${assetPath}${logoFile}?v=18`;
             if (logo.src \!== newSrc) {
                 logo.src = newSrc;
                 console.log(`Logo updated: ${logoFile} (theme: ${theme}, lang: ${lang})`);
             }
+        } else {
+            console.log('No logo element found');
         }
     }
     
     // === THEME TOGGLE ===
     
     const themeToggle = document.getElementById('theme-toggle');
+    console.log('Theme toggle element:', themeToggle);
+    
     if (themeToggle) {
+        console.log('Theme toggle found, adding event listener');
         themeToggle.addEventListener('click', function() {
+            console.log('Theme toggle clicked\!');
             const html = document.documentElement;
             const isLight = html.hasAttribute('data-theme');
             
@@ -104,13 +113,19 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update logo after theme change
             updateLogo();
         });
+    } else {
+        console.error('Theme toggle button not found\!');
     }
     
     // === LANGUAGE TOGGLE ===
     
     const languageToggle = document.getElementById('language-toggle');
+    console.log('Language toggle element:', languageToggle);
+    
     if (languageToggle) {
+        console.log('Language toggle found, adding event listener');
         languageToggle.addEventListener('click', function() {
+            console.log('Language toggle clicked\!');
             const html = document.documentElement;
             const currentLang = html.getAttribute('data-lang');
             
@@ -141,6 +156,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => navigateToLanguage('he'), 100);
             }
         });
+    } else {
+        console.error('Language toggle button not found\!');
     }
     
     // === SMART NAVIGATION ===
@@ -206,6 +223,6 @@ document.addEventListener('DOMContentLoaded', function() {
         attributeFilter: ['data-theme', 'data-lang']
     });
     
-    console.log('Smart state management system initialized');
+    console.log('Smart state management system initialized successfully');
 });
 EOF < /dev/null
