@@ -27,25 +27,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Home button functionality
+    // Home button functionality - using relative paths
     const homeBtn = document.getElementById('home-btn');
     if (homeBtn) {
         homeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const currentLang = localStorage.getItem('preferred-language') || 'en';
-            
-            // Get the base path (should be /retro-on-agileprimero)
             const currentPath = window.location.pathname;
-            let basePath = '/retro-on-agileprimero';
             
-            // If we're in a subdirectory, extract the base
-            if (currentPath.includes('/retro-on-agileprimero/')) {
-                const parts = currentPath.split('/retro-on-agileprimero/');
-                basePath = parts[0] + '/retro-on-agileprimero';
+            // Simple relative navigation based on current location
+            if (currentPath.includes('/articles/')) {
+                // We're in an article, go up two levels then to language
+                window.location.href = `../../${currentLang}/`;
+            } else if (currentPath.includes('/en/') || currentPath.includes('/he/')) {
+                // We're in a language home, stay in same language
+                window.location.href = `./`;
+            } else {
+                // We're at root, go to language home
+                window.location.href = `./${currentLang}/`;
             }
-            
-            // Navigate to language home
-            window.location.href = `${basePath}/${currentLang}/`;
         });
     }
     
@@ -63,23 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
             // Store language preference
             localStorage.setItem('preferred-language', newLang);
             
-            // Navigate to same article in different language
-            let newPath;
-            if (currentPath.includes('/en/')) {
-                newPath = currentPath.replace('/en/', '/he/');
-            } else if (currentPath.includes('/he/')) {
-                newPath = currentPath.replace('/he/', '/en/');
-            } else {
-                // From root, go to language home
-                let basePath = '/retro-on-agileprimero';
-                if (currentPath.includes('/retro-on-agileprimero/')) {
-                    const parts = currentPath.split('/retro-on-agileprimero/');
-                    basePath = parts[0] + '/retro-on-agileprimero';
+            // Navigate to same article in different language using relative paths
+            if (currentPath.includes('/articles/')) {
+                // We're in an article
+                if (currentPath.includes('/en/')) {
+                    window.location.href = currentPath.replace('/en/', '/he/');
+                } else if (currentPath.includes('/he/')) {
+                    window.location.href = currentPath.replace('/he/', '/en/');
                 }
-                newPath = `${basePath}/${newLang}/`;
+            } else {
+                // We're in language home
+                window.location.href = `../${newLang}/`;
             }
-            
-            window.location.href = newPath;
         });
     }
     
@@ -87,8 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.endsWith('/retro-on-agileprimero/') || window.location.pathname === '/retro-on-agileprimero') {
         // Only redirect if user has a preference and isn't explicitly choosing
         if (localStorage.getItem('preferred-language')) {
-            const basePath = window.location.pathname.replace(/\/$/, '');
-            window.location.href = `${basePath}/${currentLang}/`;
+            window.location.href = `./${currentLang}/`;
         }
     }
 });
