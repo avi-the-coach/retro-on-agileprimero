@@ -21,17 +21,17 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateLogo() {
         const logo = document.querySelector('.logo');
         if (logo) {
-            const isDark = !document.documentElement.hasAttribute('data-theme');
+            const isLightTheme = document.documentElement.hasAttribute('data-theme');
             const language = getCurrentLanguage();
             const isSubpage = logo.src.includes('../assets/');
             const basePath = isSubpage ? '../assets/' : 'assets/';
             
-            if (isDark) {
-                // Dark theme: show white griffin
-                logo.src = `${basePath}white_griffin_black_bg_clean_${language}.png?v=15`;
+            if (isLightTheme) {
+                // Light theme: show black griffin on white background
+                logo.src = `${basePath}black_griffin_white_bg_clean_${language}.png?v=16`;
             } else {
-                // Light theme: show black griffin
-                logo.src = `${basePath}black_griffin_white_bg_clean_${language}.png?v=15`;
+                // Dark theme: show white griffin on black background
+                logo.src = `${basePath}white_griffin_black_bg_clean_${language}.png?v=16`;
             }
         }
     }
@@ -50,18 +50,18 @@ document.addEventListener('DOMContentLoaded', function() {
     // Theme toggle event
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
-            const isDark = !document.documentElement.hasAttribute('data-theme');
+            const isLightTheme = document.documentElement.hasAttribute('data-theme');
             
-            if (isDark) {
-                // Currently dark, switching to light
-                document.documentElement.setAttribute('data-theme', 'light');
-                themeToggle.textContent = '🌙'; // Show moon to indicate "click for dark theme"
-                localStorage.setItem('theme', 'light');
-            } else {
+            if (isLightTheme) {
                 // Currently light, switching to dark
                 document.documentElement.removeAttribute('data-theme');
                 themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
                 localStorage.setItem('theme', 'dark');
+            } else {
+                // Currently dark, switching to light
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.textContent = '🌙'; // Show moon to indicate "click for dark theme"
+                localStorage.setItem('theme', 'light');
             }
             
             // Update logo after theme change
@@ -119,3 +119,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+EOF < /dev/null
