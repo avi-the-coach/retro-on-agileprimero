@@ -25,7 +25,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
-  line-height: 1.6;
+  line-height: 1.7;
   transition: all 0.3s ease;
   font-size: 16px;
 }
@@ -187,61 +187,89 @@ body {
   line-height: 1.5;
 }
 
+/* Article Content Styling */
 .article-content {
   max-width: 100%;
+  line-height: 1.7;
 }
 
 .article-content h1 {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   line-height: 1.2;
   letter-spacing: -0.5px;
+  color: var(--text-color);
 }
 
 .article-content h2 {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 600;
-  margin: 50px 0 20px 0;
+  margin: 50px 0 25px 0;
+  line-height: 1.3;
   letter-spacing: -0.3px;
+  color: var(--text-color);
 }
 
 .article-content h3 {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
-  margin: 40px 0 15px 0;
+  margin: 40px 0 20px 0;
+  line-height: 1.3;
   letter-spacing: -0.2px;
+  color: var(--text-color);
 }
 
 .article-content p {
-  margin-bottom: 24px;
-  font-size: 16px;
+  margin-bottom: 25px;
+  font-size: 17px;
   line-height: 1.7;
+  color: var(--text-color);
+}
+
+.article-content p:first-of-type {
+  font-size: 18px;
+  margin-bottom: 30px;
 }
 
 .article-content em {
   font-style: italic;
   opacity: 0.8;
+  font-size: 16px;
 }
 
 .article-content strong {
   font-weight: 600;
+  color: var(--text-color);
 }
 
 .article-content ul, .article-content ol {
-  margin: 24px 0 24px 30px;
+  margin: 25px 0;
+  padding-left: 30px;
   line-height: 1.7;
 }
 
+[dir="rtl"] .article-content ul, 
+[dir="rtl"] .article-content ol {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
 .article-content li {
-  margin-bottom: 12px;
-  font-size: 16px;
+  margin-bottom: 15px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
+.article-content ol li {
+  font-weight: 500;
 }
 
 .article-content hr {
   border: none;
   border-top: 1px solid var(--border-color);
-  margin: 50px 0;
+  margin: 60px 0;
 }
 
 .nav-back {
@@ -254,9 +282,24 @@ body {
   transition: all 0.2s ease;
   font-size: 14px;
   border-radius: 4px;
+  font-weight: 500;
 }
 
 .nav-back:hover {
   background-color: var(--hover-color);
   border-color: var(--text-color);
+}
+
+/* Better spacing for article sections */
+.article-content > p + h2 {
+  margin-top: 60px;
+}
+
+.article-content > h2 + p {
+  margin-top: 20px;
+}
+
+/* Ensure text stays visible in both themes */
+.article-content * {
+  color: inherit;
 }
