@@ -75,9 +75,9 @@ body {
 
 /* Logo - JavaScript handles the switching */
 .logo {
-  height: 120px;
+  height: 138px;
   width: auto;
-  max-width: 120px;
+  max-width: 138px;
   object-fit: contain;
   transition: opacity 0.3s ease;
 }
