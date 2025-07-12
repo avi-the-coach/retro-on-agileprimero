@@ -34,8 +34,18 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const currentLang = localStorage.getItem('preferred-language') || 'en';
             
-            // Simple approach: go to the repo root + language
-            window.location.href = `/retro-on-agileprimero/${currentLang}/`;
+            // Get the base path (should be /retro-on-agileprimero)
+            const currentPath = window.location.pathname;
+            let basePath = '/retro-on-agileprimero';
+            
+            // If we're in a subdirectory, extract the base
+            if (currentPath.includes('/retro-on-agileprimero/')) {
+                const parts = currentPath.split('/retro-on-agileprimero/');
+                basePath = parts[0] + '/retro-on-agileprimero';
+            }
+            
+            // Navigate to language home
+            window.location.href = `${basePath}/${currentLang}/`;
         });
     }
     
@@ -61,7 +71,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 newPath = currentPath.replace('/he/', '/en/');
             } else {
                 // From root, go to language home
-                newPath = `/retro-on-agileprimero/${newLang}/`;
+                let basePath = '/retro-on-agileprimero';
+                if (currentPath.includes('/retro-on-agileprimero/')) {
+                    const parts = currentPath.split('/retro-on-agileprimero/');
+                    basePath = parts[0] + '/retro-on-agileprimero';
+                }
+                newPath = `${basePath}/${newLang}/`;
             }
             
             window.location.href = newPath;
@@ -72,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.endsWith('/retro-on-agileprimero/') || window.location.pathname === '/retro-on-agileprimero') {
         // Only redirect if user has a preference and isn't explicitly choosing
         if (localStorage.getItem('preferred-language')) {
-            window.location.href = `/retro-on-agileprimero/${currentLang}/`;
+            const basePath = window.location.pathname.replace(/\/$/, '');
+            window.location.href = `${basePath}/${currentLang}/`;
         }
     }
 });
