@@ -34,9 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const currentLang = localStorage.getItem('preferred-language') || 'en';
             
-            // Get the base URL and construct proper path
-            const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/').replace(/\/retro-on-agileprimero/, '') + '/retro-on-agileprimero';
-            window.location.href = `${baseUrl}/${currentLang}/`;
+            // Simple approach: go to the repo root + language
+            window.location.href = `/retro-on-agileprimero/${currentLang}/`;
         });
     }
     
@@ -62,8 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 newPath = currentPath.replace('/he/', '/en/');
             } else {
                 // From root, go to language home
-                const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/').replace(/\/retro-on-agileprimero/, '') + '/retro-on-agileprimero';
-                newPath = `${baseUrl}/${newLang}/`;
+                newPath = `/retro-on-agileprimero/${newLang}/`;
             }
             
             window.location.href = newPath;
@@ -71,10 +69,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Auto-redirect from root based on preference
-    if (window.location.pathname.endsWith('/retro-on-agileprimero/') && currentLang !== 'selector') {
+    if (window.location.pathname.endsWith('/retro-on-agileprimero/') || window.location.pathname === '/retro-on-agileprimero') {
         // Only redirect if user has a preference and isn't explicitly choosing
         if (localStorage.getItem('preferred-language')) {
-            window.location.href = window.location.href + `${currentLang}/`;
+            window.location.href = `/retro-on-agileprimero/${currentLang}/`;
         }
     }
 });
