@@ -30,11 +30,56 @@ document.addEventListener('DOMContentLoaded', function() {
             html.setAttribute('dir', 'ltr');
         }
         
+        // Update logo immediately
+        updateLogo();
+        
         console.log(`Initialized: theme=${savedTheme}, lang=${savedLang}`);
     }
     
     // Apply state on page load
     initializeState();
+    
+    // === SMART LOGO SYSTEM ===
+    
+    function updateLogo() {
+        const html = document.documentElement;
+        const theme = html.hasAttribute('data-theme') ? 'light' : 'dark';
+        const lang = html.getAttribute('data-lang') || 'he';
+        
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            // Determine correct logo file
+            let logoFile;
+            if (theme === 'dark') {
+                logoFile = lang === 'he' 
+                    ? 'white_griffin_black_bg_clean_he.png'
+                    : 'white_griffin_black_bg_clean_en.png';
+            } else {
+                logoFile = lang === 'he'
+                    ? 'black_griffin_white_bg_clean_he.png' 
+                    : 'black_griffin_white_bg_clean_en.png';
+            }
+            
+            // Determine path based on current location
+            const currentPath = window.location.pathname;
+            let assetPath;
+            
+            if (currentPath === '/' || currentPath === '/index.html') {
+                assetPath = 'assets/';
+            } else if (currentPath.includes('/articles/')) {
+                assetPath = '../../../assets/';
+            } else {
+                assetPath = '../assets/';
+            }
+            
+            // Update logo source with cache busting
+            const newSrc = `${assetPath}${logoFile}?v=17`;
+            if (logo.src \!== newSrc) {
+                logo.src = newSrc;
+                console.log(`Logo updated: ${logoFile} (theme: ${theme}, lang: ${lang})`);
+            }
+        }
+    }
     
     // === THEME TOGGLE ===
     
@@ -55,6 +100,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('theme', 'light');
                 console.log('Switched to light theme');
             }
+            
+            // Update logo after theme change
+            updateLogo();
         });
     }
     
@@ -73,8 +121,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('language', 'en');
                 console.log('Switched to English');
                 
+                // Update logo immediately
+                updateLogo();
+                
                 // Navigate to English version if available
-                navigateToLanguage('en');
+                setTimeout(() => navigateToLanguage('en'), 100);
                 
             } else {
                 // Switch to Hebrew
@@ -83,8 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('language', 'he');
                 console.log('Switched to Hebrew');
                 
+                // Update logo immediately
+                updateLogo();
+                
                 // Navigate to Hebrew version if available
-                navigateToLanguage('he');
+                setTimeout(() => navigateToLanguage('he'), 100);
             }
         });
     }
@@ -129,47 +183,28 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // === LOGO UPDATE SYSTEM ===
+    // === OBSERVE STATE CHANGES ===
     
-    // The logo updates automatically via CSS custom properties\!
-    // No JavaScript needed - CSS handles all combinations:
-    // [data-theme="dark"][data-lang="he"] → white_griffin_black_bg_clean_he.png
-    // [data-theme="light"][data-lang="en"] → black_griffin_white_bg_clean_en.png
-    // etc.
-    
-    function updateLogo() {
-        // This function exists for debugging - CSS handles actual logo switching
-        const html = document.documentElement;
-        const theme = html.hasAttribute('data-theme') ? 'light' : 'dark';
-        const lang = html.getAttribute('data-lang') || 'he';
-        
-        console.log(`Logo should be: ${theme} theme, ${lang} language`);
-        
-        // Expected logo file pattern:
-        const expectedLogo = theme === 'dark' 
-            ? `white_griffin_black_bg_clean_${lang}.png`
-            : `black_griffin_white_bg_clean_${lang}.png`;
-            
-        console.log(`Expected logo file: ${expectedLogo}`);
-    }
-    
-    // Debug logo on state changes
+    // Watch for manual attribute changes and update logo accordingly
     const observer = new MutationObserver(function(mutations) {
+        let shouldUpdateLogo = false;
+        
         mutations.forEach(function(mutation) {
             if (mutation.type === 'attributes' && 
                 (mutation.attributeName === 'data-theme' || mutation.attributeName === 'data-lang')) {
-                updateLogo();
+                shouldUpdateLogo = true;
             }
         });
+        
+        if (shouldUpdateLogo) {
+            updateLogo();
+        }
     });
     
     observer.observe(document.documentElement, {
         attributes: true,
         attributeFilter: ['data-theme', 'data-lang']
     });
-    
-    // Initial logo debug
-    updateLogo();
     
     console.log('Smart state management system initialized');
 });
