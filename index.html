@@ -5,19 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agile Primero - AI Transformation Insights</title>
     <link rel="stylesheet" href="assets/style.css?v=18">
-    <style>
-        /* Fallback debugging styles */
-        #theme-toggle, #language-toggle {
-            display: inline-block \!important;
-            background: red \!important;
-            color: white \!important;
-            padding: 10px \!important;
-            border: 1px solid black \!important;
-            cursor: pointer \!important;
-        }
-        #theme-toggle::before { content: "🌞" \!important; }
-        #language-toggle::before { content: "EN" \!important; }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -30,8 +17,8 @@
                 </div>
             </div>
             <div class="controls">
-                <button id="theme-toggle" aria-label="Toggle theme">THEME</button>
-                <button id="language-toggle" aria-label="Toggle language">LANG</button>
+                <button id="theme-toggle" aria-label="Toggle theme"></button>
+                <button id="language-toggle" aria-label="Toggle language"></button>
             </div>
         </header>
         
@@ -46,29 +33,6 @@
         </main>
     </div>
     
-    <script>
-        console.log('Script loading...');
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM loaded');
-            const themeBtn = document.getElementById('theme-toggle');
-            const langBtn = document.getElementById('language-toggle');
-            console.log('Theme button:', themeBtn);
-            console.log('Lang button:', langBtn);
-            
-            if (themeBtn) {
-                themeBtn.onclick = function() {
-                    alert('Theme clicked\!');
-                    document.documentElement.toggleAttribute('data-theme');
-                };
-            }
-            
-            if (langBtn) {
-                langBtn.onclick = function() {
-                    alert('Language clicked\!');
-                };
-            }
-        });
-    </script>
     <script src="assets/script.js?v=18"></script>
 </body>
 </html>
