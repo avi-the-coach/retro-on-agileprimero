@@ -4,10 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'dark';
     
-    // Apply saved theme
+    // Apply saved theme and set correct icon
     if (currentTheme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
-        if (themeToggle) themeToggle.textContent = '☀️';
+        if (themeToggle) themeToggle.textContent = '🌙'; // Show moon to indicate "click for dark theme"
+    } else {
+        if (themeToggle) themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
     }
     
     // Theme toggle event
@@ -16,12 +18,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const isDark = !document.documentElement.hasAttribute('data-theme');
             
             if (isDark) {
+                // Currently dark, switching to light
                 document.documentElement.setAttribute('data-theme', 'light');
-                themeToggle.textContent = '☀️';
+                themeToggle.textContent = '🌙'; // Show moon to indicate "click for dark theme"
                 localStorage.setItem('theme', 'light');
             } else {
+                // Currently light, switching to dark
                 document.documentElement.removeAttribute('data-theme');
-                themeToggle.textContent = '🌙';
+                themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
                 localStorage.setItem('theme', 'dark');
             }
         });
