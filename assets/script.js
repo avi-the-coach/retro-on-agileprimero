@@ -1,122 +1,176 @@
-// Theme and language management
+// Smart State Management System for Retro Site
+// Centralized theme + language + logo coordination via HTML data attributes
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Theme toggle functionality
-    const themeToggle = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
     
-    // Function to detect current language from URL
-    function getCurrentLanguage() {
-        const currentPath = window.location.pathname;
-        if (currentPath.includes('/he/')) {
-            return 'he';
-        } else if (currentPath.includes('/en/')) {
-            return 'en';
+    // === STATE MANAGEMENT ===
+    
+    // Get saved preferences or defaults
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    const savedLang = localStorage.getItem('language') || 'he'; // Hebrew default
+    
+    // Apply initial state to HTML element
+    function initializeState() {
+        const html = document.documentElement;
+        
+        // Set theme
+        if (savedTheme === 'light') {
+            html.setAttribute('data-theme', 'light');
         } else {
-            // Main page - default to English
-            return 'en';
+            html.removeAttribute('data-theme'); // Dark is default
         }
-    }
-    
-    // Function to update logo based on theme and language
-    function updateLogo() {
-        const logo = document.querySelector('.logo');
-        if (logo) {
-            const isLightTheme = document.documentElement.hasAttribute('data-theme');
-            const language = getCurrentLanguage();
-            const isSubpage = logo.src.includes('../assets/');
-            const basePath = isSubpage ? '../assets/' : 'assets/';
-            
-            if (isLightTheme) {
-                // Light theme: show black griffin on white background
-                logo.src = `${basePath}black_griffin_white_bg_clean_${language}.png?v=16`;
-            } else {
-                // Dark theme: show white griffin on black background
-                logo.src = `${basePath}white_griffin_black_bg_clean_${language}.png?v=16`;
-            }
+        
+        // Set language
+        html.setAttribute('data-lang', savedLang);
+        
+        // Set direction
+        if (savedLang === 'he') {
+            html.setAttribute('dir', 'rtl');
+        } else {
+            html.setAttribute('dir', 'ltr');
         }
+        
+        console.log(`Initialized: theme=${savedTheme}, lang=${savedLang}`);
     }
     
-    // Apply saved theme and set correct icon
-    if (currentTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        if (themeToggle) themeToggle.textContent = '🌙'; // Show moon to indicate "click for dark theme"
-    } else {
-        if (themeToggle) themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
-    }
+    // Apply state on page load
+    initializeState();
     
-    // Update logo on initial load
-    updateLogo();
+    // === THEME TOGGLE ===
     
-    // Theme toggle event
+    const themeToggle = document.getElementById('theme-toggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', function() {
-            const isLightTheme = document.documentElement.hasAttribute('data-theme');
+            const html = document.documentElement;
+            const isLight = html.hasAttribute('data-theme');
             
-            if (isLightTheme) {
-                // Currently light, switching to dark
-                document.documentElement.removeAttribute('data-theme');
-                themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
+            if (isLight) {
+                // Switch to dark
+                html.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'dark');
+                console.log('Switched to dark theme');
             } else {
-                // Currently dark, switching to light
-                document.documentElement.setAttribute('data-theme', 'light');
-                themeToggle.textContent = '🌙'; // Show moon to indicate "click for dark theme"
+                // Switch to light  
+                html.setAttribute('data-theme', 'light');
                 localStorage.setItem('theme', 'light');
+                console.log('Switched to light theme');
             }
-            
-            // Update logo after theme change
-            updateLogo();
         });
     }
     
-    // Simple home button functionality - hardcoded URLs
+    // === LANGUAGE TOGGLE ===
+    
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('data-lang');
+            
+            if (currentLang === 'he') {
+                // Switch to English
+                html.setAttribute('data-lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                localStorage.setItem('language', 'en');
+                console.log('Switched to English');
+                
+                // Navigate to English version if available
+                navigateToLanguage('en');
+                
+            } else {
+                // Switch to Hebrew
+                html.setAttribute('data-lang', 'he');
+                html.setAttribute('dir', 'rtl');
+                localStorage.setItem('language', 'he');
+                console.log('Switched to Hebrew');
+                
+                // Navigate to Hebrew version if available
+                navigateToLanguage('he');
+            }
+        });
+    }
+    
+    // === SMART NAVIGATION ===
+    
+    function navigateToLanguage(targetLang) {
+        const currentPath = window.location.pathname;
+        
+        // If we're on the main language selector page, don't navigate
+        if (currentPath === '/' || currentPath === '/index.html') {
+            return;
+        }
+        
+        // Detect current language from path
+        let newPath;
+        if (currentPath.includes('/en/')) {
+            newPath = currentPath.replace('/en/', `/${targetLang}/`);
+        } else if (currentPath.includes('/he/')) {
+            newPath = currentPath.replace('/he/', `/${targetLang}/`);
+        } else {
+            // We're probably on a language home page, go to target language home
+            newPath = `/${targetLang}/`;
+        }
+        
+        // Navigate to new language version
+        window.location.href = newPath;
+    }
+    
+    // === HOME BUTTON ===
+    
     const homeBtn = document.getElementById('home-btn');
     if (homeBtn) {
         homeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Detect current language from URL
-            const currentPath = window.location.pathname;
-            let targetLang = 'en'; // default
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('data-lang') || 'he';
             
-            if (currentPath.includes('/he/')) {
-                targetLang = 'he';
-            } else if (currentPath.includes('/en/')) {
-                targetLang = 'en';
-            }
-            
-            // Always go to the correct base URL
-            if (targetLang === 'he') {
-                window.location.href = 'https://avi-the-coach.github.io/retro-on-agileprimero/he/';
-            } else {
-                window.location.href = 'https://avi-the-coach.github.io/retro-on-agileprimero/en/';
-            }
+            // Go to language home page
+            window.location.href = `/${currentLang}/`;
         });
     }
     
-    // Language toggle functionality - simplified
-    const langToggle = document.getElementById('language-toggle');
-    if (langToggle) {
-        langToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            const currentPath = window.location.pathname;
+    // === LOGO UPDATE SYSTEM ===
+    
+    // The logo updates automatically via CSS custom properties\!
+    // No JavaScript needed - CSS handles all combinations:
+    // [data-theme="dark"][data-lang="he"] → white_griffin_black_bg_clean_he.png
+    // [data-theme="light"][data-lang="en"] → black_griffin_white_bg_clean_en.png
+    // etc.
+    
+    function updateLogo() {
+        // This function exists for debugging - CSS handles actual logo switching
+        const html = document.documentElement;
+        const theme = html.hasAttribute('data-theme') ? 'light' : 'dark';
+        const lang = html.getAttribute('data-lang') || 'he';
+        
+        console.log(`Logo should be: ${theme} theme, ${lang} language`);
+        
+        // Expected logo file pattern:
+        const expectedLogo = theme === 'dark' 
+            ? `white_griffin_black_bg_clean_${lang}.png`
+            : `black_griffin_white_bg_clean_${lang}.png`;
             
-            if (currentPath.includes('/en/')) {
-                // Switch to Hebrew
-                if (currentPath.includes('/articles/')) {
-                    window.location.href = currentPath.replace('/en/', '/he/');
-                } else {
-                    window.location.href = 'https://avi-the-coach.github.io/retro-on-agileprimero/he/';
-                }
-            } else if (currentPath.includes('/he/')) {
-                // Switch to English
-                if (currentPath.includes('/articles/')) {
-                    window.location.href = currentPath.replace('/he/', '/en/');
-                } else {
-                    window.location.href = 'https://avi-the-coach.github.io/retro-on-agileprimero/en/';
-                }
+        console.log(`Expected logo file: ${expectedLogo}`);
+    }
+    
+    // Debug logo on state changes
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && 
+                (mutation.attributeName === 'data-theme' || mutation.attributeName === 'data-lang')) {
+                updateLogo();
             }
         });
-    }
+    });
+    
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme', 'data-lang']
+    });
+    
+    // Initial logo debug
+    updateLogo();
+    
+    console.log('Smart state management system initialized');
 });
 EOF < /dev/null
