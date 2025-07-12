@@ -4,6 +4,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'dark';
     
+    // Function to update logo based on theme
+    function updateLogo() {
+        const logo = document.querySelector('.logo');
+        if (logo) {
+            const isDark = !document.documentElement.hasAttribute('data-theme');
+            if (isDark) {
+                // Dark theme: show white griffin
+                logo.src = logo.src.includes('../assets/') 
+                    ? '../assets/white_griffin_black_bg_clean.png'
+                    : 'assets/white_griffin_black_bg_clean.png';
+            } else {
+                // Light theme: show black griffin
+                logo.src = logo.src.includes('../assets/')
+                    ? '../assets/black_griffin_white_bg_clean.png' 
+                    : 'assets/black_griffin_white_bg_clean.png';
+            }
+        }
+    }
+    
     // Apply saved theme and set correct icon
     if (currentTheme === 'light') {
         document.documentElement.setAttribute('data-theme', 'light');
@@ -11,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         if (themeToggle) themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
     }
+    
+    // Update logo on initial load
+    updateLogo();
     
     // Theme toggle event
     if (themeToggle) {
@@ -28,6 +50,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 themeToggle.textContent = '☀️'; // Show sun to indicate "click for light theme"
                 localStorage.setItem('theme', 'dark');
             }
+            
+            // Update logo after theme change
+            updateLogo();
         });
     }
     
