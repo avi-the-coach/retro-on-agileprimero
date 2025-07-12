@@ -33,7 +33,10 @@ document.addEventListener('DOMContentLoaded', function() {
         homeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const currentLang = localStorage.getItem('preferred-language') || 'en';
-            window.location.href = `/${currentLang}/`;
+            
+            // Get the base URL and construct proper path
+            const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/').replace(/\/retro-on-agileprimero/, '') + '/retro-on-agileprimero';
+            window.location.href = `${baseUrl}/${currentLang}/`;
         });
     }
     
@@ -53,12 +56,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Navigate to same article in different language
             let newPath;
-            if (currentPath.startsWith('/en/')) {
+            if (currentPath.includes('/en/')) {
                 newPath = currentPath.replace('/en/', '/he/');
-            } else if (currentPath.startsWith('/he/')) {
+            } else if (currentPath.includes('/he/')) {
                 newPath = currentPath.replace('/he/', '/en/');
             } else {
-                newPath = `/${newLang}/`;
+                // From root, go to language home
+                const baseUrl = window.location.origin + window.location.pathname.split('/').slice(0, -1).join('/').replace(/\/retro-on-agileprimero/, '') + '/retro-on-agileprimero';
+                newPath = `${baseUrl}/${newLang}/`;
             }
             
             window.location.href = newPath;
@@ -66,10 +71,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Auto-redirect from root based on preference
-    if (window.location.pathname === '/' && currentLang !== 'selector') {
+    if (window.location.pathname.endsWith('/retro-on-agileprimero/') && currentLang !== 'selector') {
         // Only redirect if user has a preference and isn't explicitly choosing
         if (localStorage.getItem('preferred-language')) {
-            window.location.href = `/${currentLang}/`;
+            window.location.href = window.location.href + `${currentLang}/`;
         }
     }
 });
