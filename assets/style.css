@@ -66,24 +66,20 @@ body {
 .logo {
   height: 50px;
   width: auto;
-  transition: filter 0.3s ease;
+  transition: opacity 0.3s ease;
   max-width: 50px;
   object-fit: contain;
 }
 
-/* Better approach - preserve griffin details while changing colors */
-/* Dark theme (default): Make griffin white while preserving details */
-body .logo,
-.branding .logo,
-img.logo {
-  filter: invert(1) contrast(200%) !important;
+/* Theme-responsive logo using different images */
+/* Dark theme (default): Show white griffin on transparent background */
+.logo {
+  content: url("white_griffin_black_bg_clean.png");
 }
 
-/* Light theme: Keep griffin dark but enhance contrast */
-[data-theme="light"] body .logo,
-[data-theme="light"] .branding .logo,
-[data-theme="light"] img.logo {
-  filter: contrast(150%) saturate(0.5) !important;
+/* Light theme: Show black griffin on transparent background */
+[data-theme="light"] .logo {
+  content: url("black_griffin_white_bg_clean.png");
 }
 
 .company-info h1 {
