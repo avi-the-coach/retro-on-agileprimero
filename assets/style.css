@@ -1,5 +1,6 @@
 /* Smart CSS Architecture for Retro Site
-   Centralized theme + language + logo management via CSS custom properties */
+   Centralized theme + language management via CSS custom properties
+   Logo switching handled by JavaScript */
 
 /* === CENTRALIZED STATE SYSTEM === */
 :root {
@@ -9,15 +10,6 @@
   --accent-color: #ffffff;
   --border-color: #333333;
   --hover-color: #333333;
-  
-  /* Logo system - Dynamic based on theme + language */
-  --logo-dark-en: url('./white_griffin_black_bg_clean_en.png');
-  --logo-dark-he: url('./white_griffin_black_bg_clean_he.png');
-  --logo-light-en: url('./black_griffin_white_bg_clean_en.png');
-  --logo-light-he: url('./black_griffin_white_bg_clean_he.png');
-  
-  /* Active logo - defaults to dark theme Hebrew */
-  --logo-active: var(--logo-dark-he);
 }
 
 /* === THEME VARIANTS === */
@@ -28,25 +20,6 @@
   --accent-color: #000000;
   --border-color: #e0e0e0;
   --hover-color: #f0f0f0;
-}
-
-/* === SMART LOGO SYSTEM === */
-/* Dark theme logos */
-:root[data-lang="en"], [data-theme="dark"][data-lang="en"] {
-  --logo-active: var(--logo-dark-en);
-}
-
-:root[data-lang="he"], [data-theme="dark"][data-lang="he"] {
-  --logo-active: var(--logo-dark-he);
-}
-
-/* Light theme logos */
-[data-theme="light"][data-lang="en"] {
-  --logo-active: var(--logo-light-en);
-}
-
-[data-theme="light"][data-lang="he"] {
-  --logo-active: var(--logo-light-he);
 }
 
 /* === LANGUAGE SYSTEM === */
@@ -100,13 +73,12 @@ body {
   gap: 16px;
 }
 
-/* Smart logo implementation */
+/* Logo - JavaScript handles the switching */
 .logo {
   height: 50px;
   width: auto;
   max-width: 50px;
   object-fit: contain;
-  content: var(--logo-active);
   transition: opacity 0.3s ease;
 }
 
@@ -140,24 +112,25 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
+  min-width: 40px;
 }
 
 #theme-toggle:hover, #language-toggle:hover {
   background: var(--hover-color);
 }
 
-/* Theme toggle icons */
-[data-theme="dark"] #theme-toggle::before {
-  content: "☀️";
+/* Theme toggle icons - controlled by JavaScript but styled here */
+#theme-toggle::before {
+  content: "☀️"; /* Default - will be overridden by JS */
 }
 
 [data-theme="light"] #theme-toggle::before {
   content: "🌙";
 }
 
-/* Language toggle text */
-[data-lang="he"] #language-toggle::before {
-  content: "EN";
+/* Language toggle text - controlled by JavaScript */
+#language-toggle::before {
+  content: "EN"; /* Default - will be overridden by JS */
 }
 
 [data-lang="en"] #language-toggle::before {
@@ -345,8 +318,8 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
-/* Logo transition handled by CSS content property */
+/* Logo transition */
 .logo {
-  transition: content 0.3s ease, opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 EOF < /dev/null
