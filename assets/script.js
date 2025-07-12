@@ -27,25 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Home button functionality - using relative paths
+    // Home button functionality - construct absolute URL
     const homeBtn = document.getElementById('home-btn');
     if (homeBtn) {
         homeBtn.addEventListener('click', function(e) {
             e.preventDefault();
             const currentLang = localStorage.getItem('preferred-language') || 'en';
-            const currentPath = window.location.pathname;
             
-            // Simple relative navigation based on current location
-            if (currentPath.includes('/articles/')) {
-                // We're in an article, go up two levels then to language
-                window.location.href = `../../${currentLang}/`;
-            } else if (currentPath.includes('/en/') || currentPath.includes('/he/')) {
-                // We're in a language home, stay in same language
-                window.location.href = `./`;
-            } else {
-                // We're at root, go to language home
-                window.location.href = `./${currentLang}/`;
-            }
+            // Build the correct absolute URL
+            const baseUrl = 'https://avi-the-coach.github.io/retro-on-agileprimero';
+            window.location.href = `${baseUrl}/${currentLang}/`;
         });
     }
     
@@ -63,26 +54,30 @@ document.addEventListener('DOMContentLoaded', function() {
             // Store language preference
             localStorage.setItem('preferred-language', newLang);
             
-            // Navigate to same article in different language using relative paths
+            // Build absolute URL for language switch
+            const baseUrl = 'https://avi-the-coach.github.io/retro-on-agileprimero';
+            
             if (currentPath.includes('/articles/')) {
-                // We're in an article
-                if (currentPath.includes('/en/')) {
-                    window.location.href = currentPath.replace('/en/', '/he/');
-                } else if (currentPath.includes('/he/')) {
-                    window.location.href = currentPath.replace('/he/', '/en/');
+                // Extract article path and switch language
+                const articleMatch = currentPath.match(/\/articles\/(.+)$/);
+                if (articleMatch) {
+                    window.location.href = `${baseUrl}/${newLang}/articles/${articleMatch[1]}`;
+                } else {
+                    window.location.href = `${baseUrl}/${newLang}/`;
                 }
             } else {
-                // We're in language home
-                window.location.href = `../${newLang}/`;
+                // Go to language home
+                window.location.href = `${baseUrl}/${newLang}/`;
             }
         });
     }
     
-    // Auto-redirect from root based on preference
-    if (window.location.pathname.endsWith('/retro-on-agileprimero/') || window.location.pathname === '/retro-on-agileprimero') {
-        // Only redirect if user has a preference and isn't explicitly choosing
+    // Auto-redirect from root based on preference - only if no language preference set yet
+    if (window.location.pathname.endsWith('/retro-on-agileprimero/') || 
+        window.location.pathname === '/retro-on-agileprimero') {
         if (localStorage.getItem('preferred-language')) {
-            window.location.href = `./${currentLang}/`;
+            const baseUrl = 'https://avi-the-coach.github.io/retro-on-agileprimero';
+            window.location.href = `${baseUrl}/${currentLang}/`;
         }
     }
 });
