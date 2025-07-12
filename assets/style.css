@@ -75,9 +75,9 @@ body {
 
 /* Logo - JavaScript handles the switching */
 .logo {
-  height: 50px;
+  height: 70px;
   width: auto;
-  max-width: 50px;
+  max-width: 70px;
   object-fit: contain;
   transition: opacity 0.3s ease;
 }
@@ -399,7 +399,6 @@ body {
 .logo {
   transition: opacity 0.3s ease;
 }
-EOF < /dev/null
 
 /* === DEBUGGING STYLES FOR THEME TOGGLE === */
 /* Force buttons to be visible with extreme styling */
@@ -453,4 +452,3 @@ EOF < /dev/null
     padding: 10px \!important;
     border: 2px solid red \!important;
 }
-EOF < /dev/null
