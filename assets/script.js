@@ -4,21 +4,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const themeToggle = document.getElementById('theme-toggle');
     const currentTheme = localStorage.getItem('theme') || 'dark';
     
-    // Function to update logo based on theme
+    // Function to detect current language from URL
+    function getCurrentLanguage() {
+        const currentPath = window.location.pathname;
+        if (currentPath.includes('/he/')) {
+            return 'he';
+        } else if (currentPath.includes('/en/')) {
+            return 'en';
+        } else {
+            // Main page - default to English
+            return 'en';
+        }
+    }
+    
+    // Function to update logo based on theme and language
     function updateLogo() {
         const logo = document.querySelector('.logo');
         if (logo) {
             const isDark = !document.documentElement.hasAttribute('data-theme');
+            const language = getCurrentLanguage();
+            const isSubpage = logo.src.includes('../assets/');
+            const basePath = isSubpage ? '../assets/' : 'assets/';
+            
             if (isDark) {
                 // Dark theme: show white griffin
-                logo.src = logo.src.includes('../assets/') 
-                    ? '../assets/white_griffin_black_bg_clean.png'
-                    : 'assets/white_griffin_black_bg_clean.png';
+                logo.src = `${basePath}white_griffin_black_bg_clean_${language}.png?v=15`;
             } else {
                 // Light theme: show black griffin
-                logo.src = logo.src.includes('../assets/')
-                    ? '../assets/black_griffin_white_bg_clean.png' 
-                    : 'assets/black_griffin_white_bg_clean.png';
+                logo.src = `${basePath}black_griffin_white_bg_clean_${language}.png?v=15`;
             }
         }
     }
