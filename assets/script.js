@@ -1,5 +1,5 @@
 // Smart State Management System for Retro Site
-// Centralized theme + language + logo coordination via HTML data attributes
+// Updated for Hebrew-first index structure
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded, initializing smart state management...');
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update logo immediately
                 updateLogo();
                 
-                // Navigate to English version if available
+                // Navigate to English version
                 setTimeout(() => navigateToLanguage('en'), 100);
                 
             } else {
@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Update logo immediately
                 updateLogo();
                 
-                // Navigate to Hebrew version if available
+                // Navigate to Hebrew version
                 setTimeout(() => navigateToLanguage('he'), 100);
             }
         });
@@ -164,25 +164,27 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function navigateToLanguage(targetLang) {
         const currentPath = window.location.pathname;
+        console.log(`Navigating from ${currentPath} to ${targetLang}`);
         
-        // If we're on the main language selector page, don't navigate
-        if (currentPath === '/' || currentPath === '/index.html') {
-            return;
-        }
-        
-        // Detect current language from path
-        let newPath;
-        if (currentPath.includes('/en/')) {
-            newPath = currentPath.replace('/en/', `/${targetLang}/`);
-        } else if (currentPath.includes('/he/')) {
-            newPath = currentPath.replace('/he/', `/${targetLang}/`);
+        if (targetLang === 'he') {
+            // Go to Hebrew main index
+            if (currentPath === '/en/' || currentPath === '/en/index.html') {
+                window.location.href = '/';
+            } else if (currentPath.includes('/en/articles/')) {
+                // Switch English article to Hebrew
+                const newPath = currentPath.replace('/en/', '/he/');
+                window.location.href = newPath;
+            }
         } else {
-            // We're probably on a language home page, go to target language home
-            newPath = `/${targetLang}/`;
+            // Go to English
+            if (currentPath === '/' || currentPath === '/index.html') {
+                window.location.href = '/en/';
+            } else if (currentPath.includes('/he/articles/')) {
+                // Switch Hebrew article to English
+                const newPath = currentPath.replace('/he/', '/en/');
+                window.location.href = newPath;
+            }
         }
-        
-        // Navigate to new language version
-        window.location.href = newPath;
     }
     
     // === HOME BUTTON ===
@@ -195,8 +197,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const html = document.documentElement;
             const currentLang = html.getAttribute('data-lang') || 'he';
             
-            // Go to language home page
-            window.location.href = `/${currentLang}/`;
+            // Go to appropriate home page
+            if (currentLang === 'he') {
+                window.location.href = '/';
+            } else {
+                window.location.href = '/en/';
+            }
         });
     }
     
