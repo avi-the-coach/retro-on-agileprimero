@@ -71,16 +71,7 @@ body {
   object-fit: contain;
 }
 
-/* Theme-responsive logo using different images - CORRECTED LOGIC */
-/* Dark theme (default): Show WHITE griffin (makes sense on dark background) */
-.logo {
-  content: url("white_griffin_black_bg_clean.png");
-}
-
-/* Light theme: Show BLACK griffin (makes sense on light background) */
-[data-theme="light"] .logo {
-  content: url("black_griffin_white_bg_clean.png");
-}
+/* Remove CSS content approach - let JavaScript handle image swapping */
 
 .company-info h1 {
   font-size: 24px;
