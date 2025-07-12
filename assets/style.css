@@ -71,13 +71,13 @@ body {
   object-fit: contain;
 }
 
-/* Theme-responsive logo using different images */
-/* Dark theme (default): Show white griffin on transparent background */
+/* Theme-responsive logo using different images - CORRECTED LOGIC */
+/* Dark theme (default): Show WHITE griffin (makes sense on dark background) */
 .logo {
   content: url("white_griffin_black_bg_clean.png");
 }
 
-/* Light theme: Show black griffin on transparent background */
+/* Light theme: Show BLACK griffin (makes sense on light background) */
 [data-theme="light"] .logo {
   content: url("black_griffin_white_bg_clean.png");
 }
