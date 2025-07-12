@@ -27,6 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Home button functionality
+    const homeBtn = document.getElementById('home-btn');
+    if (homeBtn) {
+        homeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentLang = localStorage.getItem('preferred-language') || 'en';
+            window.location.href = `/${currentLang}/`;
+        });
+    }
+    
     // Language management
     const currentLang = localStorage.getItem('preferred-language') || 'en';
     
