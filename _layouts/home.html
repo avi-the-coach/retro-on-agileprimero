@@ -4,24 +4,7 @@ layout: default
 
 <div class="content">
     <div class="article-list">
-        <!-- Debug info -->
-        <div style="background: #333; padding: 10px; margin: 10px 0; font-family: monospace;">
-            <strong>Debug Info:</strong><br>
-            Page Language: {{ page.lang }}<br>
-            All Posts: {{ site.posts.size }}<br>
-            {% for post in site.posts %}
-            - Post: "{{ post.title }}" (lang: {{ post.lang }})<br>
-            {% endfor %}
-        </div>
-        
         {% assign filtered_posts = site.posts | where: "lang", page.lang %}
-        <div style="background: #333; padding: 10px; margin: 10px 0; font-family: monospace;">
-            <strong>Filtered Posts for {{ page.lang }}:</strong> {{ filtered_posts.size }}<br>
-            {% for post in filtered_posts %}
-            - {{ post.title }} ({{ post.lang }})<br>
-            {% endfor %}
-        </div>
-        
         {% for post in filtered_posts %}
         <article class="article-item">
             <a href="{{ post.url | relative_url }}">
