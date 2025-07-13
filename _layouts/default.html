@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% endif %}>
+<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const html = document.documentElement;
             const savedTheme = localStorage.getItem('theme');
-            const savedLang = localStorage.getItem('language') || '{{ site.default_lang }}';
+            const currentPageLang = '{{ page.lang | default: site.default_lang }}';
             
             // Apply saved theme
             if (savedTheme === 'light') {
@@ -41,9 +41,9 @@
                 html.removeAttribute('data-theme'); // Dark theme default
             }
             
-            // Apply saved language
-            html.setAttribute('data-lang', savedLang);
-            if (savedLang === 'he') {
+            // Respect page language instead of overriding with localStorage
+            html.setAttribute('data-lang', currentPageLang);
+            if (currentPageLang === 'he') {
                 html.setAttribute('dir', 'rtl');
             } else {
                 html.setAttribute('dir', 'ltr');
