@@ -6,9 +6,9 @@
         const currentLang = html.getAttribute('data-lang');
         
         if (isLight) {
-            logo.src = `{{ '/assets/images/black_griffin_white_bg_clean_' | relative_url }}${currentLang}.png?v=20`;
+            logo.src = `/assets/black_griffin_white_bg_clean_${currentLang}.png?v=20`;
         } else {
-            logo.src = `{{ '/assets/images/white_griffin_black_bg_clean_' | relative_url }}${currentLang}.png?v=20`;
+            logo.src = `/assets/white_griffin_black_bg_clean_${currentLang}.png?v=20`;
         }
     }
     
