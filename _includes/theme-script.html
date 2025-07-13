@@ -32,9 +32,9 @@
         const currentLang = html.getAttribute('data-lang');
         
         if (currentLang === 'he') {
-            window.location.href = '{{ "/en/" | relative_url }}';
+            window.location.href = '/en/';
         } else {
-            window.location.href = '{{ "/" | relative_url }}';
+            window.location.href = '/';
         }
     }
 </script>
