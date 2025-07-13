@@ -32,34 +32,24 @@
         const currentLang = html.getAttribute('data-lang');
         const currentPath = window.location.pathname;
         
-        // Article URL patterns to match
-        const articlePatterns = {
-            he: /^\/he\/articles\/([^\/]+)\/?$/,
-            en: /^\/en\/articles\/([^\/]+)\/?$/
+        // Define article URL mappings between languages
+        const articleMappings = {
+            // English to Hebrew
+            '/en/articles/four-stages-ai-transformation/': '/ai-transformation/organizational-change/four-stages-ai-transformation-he/',
+            // Hebrew to English  
+            '/ai-transformation/organizational-change/four-stages-ai-transformation-he/': '/en/articles/four-stages-ai-transformation/'
         };
         
         let targetUrl;
         
-        if (currentLang === 'he') {
-            // Switching from Hebrew to English
-            const heMatch = currentPath.match(articlePatterns.he);
-            if (heMatch) {
-                // We're in a Hebrew article, go to English version
-                const articleSlug = heMatch[1];
-                targetUrl = `/en/articles/${articleSlug}/`;
-            } else {
-                // We're on Hebrew homepage, go to English homepage
-                targetUrl = '/en/';
-            }
+        // Check if current path is a mapped article
+        if (articleMappings[currentPath]) {
+            targetUrl = articleMappings[currentPath];
         } else {
-            // Switching from English to Hebrew
-            const enMatch = currentPath.match(articlePatterns.en);
-            if (enMatch) {
-                // We're in an English article, go to Hebrew version
-                const articleSlug = enMatch[1];
-                targetUrl = `/he/articles/${articleSlug}/`;
+            // Default homepage navigation
+            if (currentLang === 'he') {
+                targetUrl = '/en/';
             } else {
-                // We're on English homepage, go to Hebrew homepage
                 targetUrl = '/';
             }
         }
