@@ -32,6 +32,9 @@
         const currentLang = html.getAttribute('data-lang');
         const currentPath = window.location.pathname;
         
+        console.log('Current path:', currentPath);
+        console.log('Current lang:', currentLang);
+        
         // Define article URL mappings between languages
         const articleMappings = {
             // English to Hebrew
@@ -45,6 +48,7 @@
         // Check if current path is a mapped article
         if (articleMappings[currentPath]) {
             targetUrl = articleMappings[currentPath];
+            console.log('Found article mapping, going to:', targetUrl);
         } else {
             // Default homepage navigation
             if (currentLang === 'he') {
@@ -52,8 +56,10 @@
             } else {
                 targetUrl = '/';
             }
+            console.log('No article mapping found, going to homepage:', targetUrl);
         }
         
+        console.log('Navigating to:', targetUrl);
         window.location.href = targetUrl;
     }
 </script>
