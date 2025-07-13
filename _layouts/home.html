@@ -1,0 +1,35 @@
+---
+layout: default
+---
+
+<div class="content">
+    <div class="language-selector">
+        <h2>{% if page.lang == 'he' %}מאמרים ברטרוספקטיבה על AI{% else %}AI Transformation Retrospectives{% endif %}</h2>
+        <p>{% if page.lang == 'he' %}תובנות ולמידות ממסעות טרנספורמציה ארגונית עם AI{% else %}Insights and learnings from organizational AI transformation journeys{% endif %}</p>
+    </div>
+
+    <div class="article-list">
+        {% assign filtered_posts = site.posts | where: "lang", page.lang %}
+        {% for post in filtered_posts %}
+        <article class="article-item">
+            <a href="{{ post.url | relative_url }}">
+                <div class="date">
+                    {% if page.lang == 'he' %}
+                        {{ post.date | date: "%d %B %Y" }}
+                    {% else %}
+                        {{ post.date | date: "%B %d, %Y" }}
+                    {% endif %}
+                </div>
+                <h2 class="title">{{ post.title }}</h2>
+                <div class="excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</div>
+            </a>
+        </article>
+        {% endfor %}
+        
+        {% if filtered_posts.size == 0 %}
+        <div class="no-posts">
+            <p>{% if page.lang == 'he' %}אין מאמרים זמינים כרגע{% else %}No articles available yet{% endif %}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
