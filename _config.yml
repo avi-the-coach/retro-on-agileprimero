@@ -1,0 +1,72 @@
+# Site settings
+title: "Retro on AgilePrimero"
+tagline: "Retrospective insights on AI transformation"
+description: "Avi's retrospective writings on AI organizational transformation"
+url: "https://retro.agileprimero.com"
+baseurl: ""
+
+# Author
+author:
+  name: "Avi the Coach"
+  email: ""
+
+# Jekyll settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+
+# Build settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:categories/:title/
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Avi the Coach"
+  - scope:
+      path: "_posts"
+      type: "posts"
+    values:
+      layout: "post"
+
+# Bilingual settings
+languages: ["he", "en"]
+default_lang: "he"
+
+# Theme settings
+theme_default: "dark"
+
+# Exclude from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - long-prompt.md
+
+# Include
+include:
+  - _pages
+
+# Sass settings
+sass:
+  sass_dir: _sass
+  style: compressed
