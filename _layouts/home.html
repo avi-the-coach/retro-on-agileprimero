@@ -3,11 +3,6 @@ layout: default
 ---
 
 <div class="content">
-    <div class="language-selector">
-        <h2>{% if page.lang == 'he' %}מאמרים ברטרוספקטיבה על AI{% else %}AI Transformation Retrospectives{% endif %}</h2>
-        <p>{% if page.lang == 'he' %}תובנות ולמידות ממסעות טרנספורמציה ארגונית עם AI{% else %}Insights and learnings from organizational AI transformation journeys{% endif %}</p>
-    </div>
-
     <div class="article-list">
         {% assign filtered_posts = site.posts | where: "lang", page.lang %}
         {% for post in filtered_posts %}
