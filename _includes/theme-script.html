@@ -30,11 +30,40 @@
     function toggleLanguage() {
         const html = document.documentElement;
         const currentLang = html.getAttribute('data-lang');
+        const currentPath = window.location.pathname;
+        
+        // Article URL patterns to match
+        const articlePatterns = {
+            he: /^\/he\/articles\/([^\/]+)\/?$/,
+            en: /^\/en\/articles\/([^\/]+)\/?$/
+        };
+        
+        let targetUrl;
         
         if (currentLang === 'he') {
-            window.location.href = '/en/';
+            // Switching from Hebrew to English
+            const heMatch = currentPath.match(articlePatterns.he);
+            if (heMatch) {
+                // We're in a Hebrew article, go to English version
+                const articleSlug = heMatch[1];
+                targetUrl = `/en/articles/${articleSlug}/`;
+            } else {
+                // We're on Hebrew homepage, go to English homepage
+                targetUrl = '/en/';
+            }
         } else {
-            window.location.href = '/';
+            // Switching from English to Hebrew
+            const enMatch = currentPath.match(articlePatterns.en);
+            if (enMatch) {
+                // We're in an English article, go to Hebrew version
+                const articleSlug = enMatch[1];
+                targetUrl = `/he/articles/${articleSlug}/`;
+            } else {
+                // We're on English homepage, go to Hebrew homepage
+                targetUrl = '/';
+            }
         }
+        
+        window.location.href = targetUrl;
     }
 </script>
