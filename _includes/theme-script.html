@@ -1,0 +1,40 @@
+<script>
+    function updateLogo() {
+        const html = document.documentElement;
+        const logo = document.getElementById('logo');
+        const isLight = html.hasAttribute('data-theme');
+        const currentLang = html.getAttribute('data-lang');
+        
+        if (isLight) {
+            logo.src = `{{ '/assets/images/black_griffin_white_bg_clean_' | relative_url }}${currentLang}.png?v=20`;
+        } else {
+            logo.src = `{{ '/assets/images/white_griffin_black_bg_clean_' | relative_url }}${currentLang}.png?v=20`;
+        }
+    }
+    
+    function toggleTheme() {
+        const html = document.documentElement;
+        const isLight = html.hasAttribute('data-theme');
+        
+        if (isLight) {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+        updateLogo();
+        console.log('Theme toggled to:', isLight ? 'dark' : 'light');
+    }
+    
+    function toggleLanguage() {
+        const html = document.documentElement;
+        const currentLang = html.getAttribute('data-lang');
+        
+        if (currentLang === 'he') {
+            window.location.href = '{{ "/en/" | relative_url }}';
+        } else {
+            window.location.href = '{{ "/" | relative_url }}';
+        }
+    }
+</script>
