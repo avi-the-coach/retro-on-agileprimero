@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v=24">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+    
+    <!-- SEO tags -->
+    {% seo %}
+</head>
+<body>
+    {% include header.html %}
+    
+    <div class="container">
+        {{ content }}
+    </div>
+    
+    {% include footer.html %}
+    {% include theme-script.html %}
+    
+    <!-- Theme initialization -->
+    <script>
+        // Initialize theme and language from localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const html = document.documentElement;
+            const savedTheme = localStorage.getItem('theme');
+            const savedLang = localStorage.getItem('language') || '{{ site.default_lang }}';
+            
+            // Apply saved theme
+            if (savedTheme === 'light') {
+                html.setAttribute('data-theme', 'light');
+            } else {
+                html.removeAttribute('data-theme'); // Dark theme default
+            }
+            
+            // Apply saved language
+            html.setAttribute('data-lang', savedLang);
+            if (savedLang === 'he') {
+                html.setAttribute('dir', 'rtl');
+            } else {
+                html.setAttribute('dir', 'ltr');
+            }
+            
+            // Update logo
+            updateLogo();
+        });
+    </script>
+</body>
+</html>
