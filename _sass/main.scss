@@ -319,33 +319,33 @@ body {
   margin: 40px 0;
 }
 
-.article-list li {
+.article-item {
   margin-bottom: 30px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
   transition: all 0.3s ease;
 }
 
-.article-list li:hover {
+.article-item:hover {
   border-color: var(--text-color);
   background: var(--hover-color);
 }
 
-.article-list a {
+.article-item a {
   display: block;
   padding: 20px;
   text-decoration: none;
   color: inherit;
 }
 
-.article-list .date {
+.article-item .date {
   font-size: 14px;
   opacity: 0.7;
   margin-bottom: 8px;
   color: var(--text-color);
 }
 
-.article-list .title {
+.article-item .title {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 8px;
@@ -353,11 +353,18 @@ body {
   line-height: 1.4;
 }
 
-.article-list .excerpt {
+.article-item .excerpt {
   font-size: 16px;
   opacity: 0.8;
   color: var(--text-color);
   line-height: 1.6;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-color);
+  opacity: 0.7;
 }
 
 /* === RESPONSIVE DESIGN === */
