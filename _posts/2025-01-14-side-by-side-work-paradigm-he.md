@@ -3,7 +3,7 @@ layout: post
 title: "פרדיגמת עבודה זה לצד זה בעידן ה-AI"
 lang: he
 date: 2025-01-14
-excerpt: "עתיד העבודה לא מתמקד ב-AI שמחליף בני אדם - היא מתמקד בבני אדם ו-AI שעובדים זה לצד זה בשיתוף פעולה בזמן אמת. עידן הפרדיגמה הזה כבר מתגשם בעיבי ומפנה את הדרך לחינוך מתהפכת בעיבוד המידע."
+excerpt: "עתיד העבודה לא מתמקד ב-AI שמחליף בני אדם - היא מתמקד בבני אדם ו-AI שעובדים זה לצד זה בשיתוף פעולה בזמן אמת."
 english_url: /side-by-side-work-paradigm-en/
 hebrew_url: /side-by-side-work-paradigm-he/
 tags: [ai, collaboration, future-of-work, productivity, human-ai-partnership]
