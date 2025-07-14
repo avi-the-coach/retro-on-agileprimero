@@ -4,7 +4,7 @@ title: "Side-by-Side Work Paradigm in the AI Era"
 lang: en
 date: 2025-01-14
 excerpt: "The future of work isn't about AI replacing humans—it's about humans and AI working side-by-side in real-time collaboration."
-english_url: /en/articles/side-by-side-work-paradigm/
+english_url: /side-by-side-work-paradigm-en/
 hebrew_url: /side-by-side-work-paradigm-he/
 tags: [ai, collaboration, future-of-work, productivity, human-ai-partnership]
 ---
