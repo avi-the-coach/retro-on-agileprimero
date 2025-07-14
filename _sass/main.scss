@@ -103,6 +103,23 @@ body {
   align-items: center;
 }
 
+/* HOME BUTTON */
+#home-btn {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+#home-btn:hover {
+  background: var(--hover-color);
+}
+
 /* FIXED THEME TOGGLE */
 #theme-toggle {
   /* Default: Dark theme shows sun with white background */
@@ -174,22 +191,6 @@ body {
   margin-bottom: 20px;
 }
 
-#home-btn {
-  background: var(--bg-color);
-  color: var(--text-color);
-  border: 1px solid var(--border-color);
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 14px;
-  transition: all 0.3s ease;
-}
-
-#home-btn:hover {
-  background: var(--hover-color);
-}
-
 /* === CONTENT AREAS === */
 .language-selector {
   text-align: center;
@@ -250,6 +251,59 @@ body {
   color: var(--text-color);
   opacity: 0.7;
   font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* === TAG SYSTEM === */
+.article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.tag {
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.tag:hover {
+  background: var(--hover-color);
+  border-color: var(--text-color);
+}
+
+/* Active/selected tag style */
+.tag.active {
+  background: var(--text-color);
+  color: var(--bg-color);
+}
+
+/* Tag filter section */
+.tag-filter {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.tag-filter h3 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.tag-filter .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
 }
 
 .article-content {
@@ -394,6 +448,10 @@ body {
   
   .article-content {
     font-size: 16px;
+  }
+  
+  .article-tags, .tag-filter .tags {
+    justify-content: center;
   }
 }
 
