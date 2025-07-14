@@ -3,7 +3,8 @@ layout: post
 title: "למה זריזות ארגונית קריטית בעידן ה-AI"
 lang: he
 date: 2025-01-12
-excerpt: "בנוף המתפתח במהירות של AI, זריזות ארגונית איננה רק יתרון - היא הכרח הישרדות."
+categories: [ai-transformation, organizational-change]
+excerpt: "בנוף המתפתח במהירות של AI, זריזות ארגונית אינכה רק יתרון - היא הכרח הישרדות."
 english_url: /en/articles/why-organizational-agility-is-critical-in-the-ai-era/
 hebrew_url: /ai-transformation/organizational-change/organizational-agility-ai-era-he/
 tags: [agility, ai, organizational-change, adaptation, future-of-work]
