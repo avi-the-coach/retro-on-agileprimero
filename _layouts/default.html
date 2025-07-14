@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
+<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.english_url %}data-english-url="{{ page.english_url }}"{% endif %} {% if page.hebrew_url %}data-hebrew-url="{{ page.hebrew_url }}"{% endif %} {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
