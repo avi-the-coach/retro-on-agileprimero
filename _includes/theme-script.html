@@ -30,41 +30,51 @@
     function toggleLanguage() {
         const html = document.documentElement;
         const currentLang = html.getAttribute('data-lang');
-        const currentPath = window.location.pathname;
         
-        console.log('Current path:', currentPath);
-        console.log('Current lang:', currentLang);
+        console.log('Current language:', currentLang);
         
-        // Define article URL mappings between languages
-        const articleMappings = {
-            // English to Hebrew mappings
-            '/en/articles/four-stages-ai-transformation/': '/ai-transformation/organizational-change/four-stages-ai-transformation-he/',
-            '/en/articles/organizational-agility-ai-era/': '/ai-transformation/organizational-change/organizational-agility-ai-era-he/',
-            '/en/articles/side-by-side-work-paradigm/': '/ai-transformation/organizational-change/side-by-side-work-paradigm-he/',
-            
-            // Hebrew to English mappings
-            '/ai-transformation/organizational-change/four-stages-ai-transformation-he/': '/en/articles/four-stages-ai-transformation/',
-            '/ai-transformation/organizational-change/organizational-agility-ai-era-he/': '/en/articles/organizational-agility-ai-era/',
-            '/ai-transformation/organizational-change/side-by-side-work-paradigm-he/': '/en/articles/side-by-side-work-paradigm/'
-        };
+        // Check if we're on an article page with frontmatter language URLs
+        const englishUrl = '{{ page.english_url }}';
+        const hebrewUrl = '{{ page.hebrew_url }}';
+        
+        console.log('English URL from frontmatter:', englishUrl);
+        console.log('Hebrew URL from frontmatter:', hebrewUrl);
         
         let targetUrl;
         
-        // Check if current path is a mapped article
-        if (articleMappings[currentPath]) {
-            targetUrl = articleMappings[currentPath];
-            console.log('Found article mapping, going to:', targetUrl);
+        // If we have frontmatter URLs, use them
+        if (englishUrl && hebrewUrl && englishUrl !== '' && hebrewUrl !== '') {
+            if (currentLang === 'he') {
+                targetUrl = englishUrl;
+            } else {
+                targetUrl = hebrewUrl;
+            }
+            console.log('Using frontmatter URL:', targetUrl);
         } else {
-            // Default homepage navigation
+            // Fallback to homepage navigation
             if (currentLang === 'he') {
                 targetUrl = '/en/';
             } else {
                 targetUrl = '/';
             }
-            console.log('No article mapping found, going to homepage:', targetUrl);
+            console.log('Using homepage fallback:', targetUrl);
         }
         
         console.log('Navigating to:', targetUrl);
         window.location.href = targetUrl;
     }
+    
+    // Initialize theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('theme');
+        const html = document.documentElement;
+        
+        if (savedTheme === 'light') {
+            html.setAttribute('data-theme', 'light');
+        } else {
+            html.removeAttribute('data-theme');
+        }
+        
+        updateLogo();
+    });
 </script>
