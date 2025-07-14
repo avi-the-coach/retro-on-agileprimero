@@ -33,23 +33,23 @@
         
         console.log('Current language:', currentLang);
         
-        // Check if we're on an article page with frontmatter language URLs
-        const englishUrl = '{{ page.english_url }}';
-        const hebrewUrl = '{{ page.hebrew_url }}';
+        // Read URLs from data attributes
+        const englishUrl = html.getAttribute('data-english-url');
+        const hebrewUrl = html.getAttribute('data-hebrew-url');
         
-        console.log('English URL from frontmatter:', englishUrl);
-        console.log('Hebrew URL from frontmatter:', hebrewUrl);
+        console.log('English URL from data attribute:', englishUrl);
+        console.log('Hebrew URL from data attribute:', hebrewUrl);
         
         let targetUrl;
         
-        // If we have frontmatter URLs, use them
-        if (englishUrl && hebrewUrl && englishUrl !== '' && hebrewUrl !== '') {
+        // If we have data attributes with URLs, use them
+        if (englishUrl && hebrewUrl) {
             if (currentLang === 'he') {
                 targetUrl = englishUrl;
             } else {
                 targetUrl = hebrewUrl;
             }
-            console.log('Using frontmatter URL:', targetUrl);
+            console.log('Using data attribute URL:', targetUrl);
         } else {
             // Fallback to homepage navigation
             if (currentLang === 'he') {
