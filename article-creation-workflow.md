@@ -94,10 +94,24 @@ title: "Article Title"
 date: YYYY-MM-DD
 lang: en  # or "he" for Hebrew
 tags: [tag1, tag2, tag3]
-english_url: /YYYY/MM/DD/unique-article-title-slug-en/
-hebrew_url: /YYYY/MM/DD/unique-article-title-slug-he/
+english_url: /article-title-slug-en/
+hebrew_url: /article-title-slug-he/
 ---
 ```
+
+### CRITICAL: Jekyll Permalink Structure
+
+**IMPORTANT**: The Jekyll site uses `permalink: /:categories/:title/` configuration.
+
+**For articles WITHOUT categories** (most common):
+- URL structure: `https://retro.agileprimero.com/article-title-slug/`
+- Frontmatter URLs: `/article-title-slug-en/` and `/article-title-slug-he/`
+
+**For articles WITH categories** (older articles):
+- URL structure: `https://retro.agileprimero.com/category/subcategory/article-title-slug/`
+- Frontmatter URLs: `/category/subcategory/article-title-slug-en/`
+
+**Default behavior**: Unless you specifically add categories, use the simple format without date or categories.
 
 ### CRITICAL: Content Formatting Rules
 
@@ -113,8 +127,8 @@ title: "Article Title"
 date: 2024-07-14
 lang: en
 tags: [ai, agility, transformation]
-english_url: /2024/07/14/article-title-en/
-hebrew_url: /2024/07/14/article-title-he/
+english_url: /article-title-slug-en/
+hebrew_url: /article-title-slug-he/
 ---
 
 ## Introduction
@@ -128,26 +142,23 @@ Content continues...
 
 ### Language Linking Fix
 
-**IMPORTANT**: The theme-script.html needs to be updated to use frontmatter URLs instead of hardcoded mappings.
+**IMPORTANT**: The theme-script.html now uses frontmatter URLs properly.
 
-**Current Problem**: Language toggle uses hardcoded article mappings and falls back to homepage when no mapping exists.
+**How it works**:
+1. Language toggle reads `{{ page.english_url }}` and `{{ page.hebrew_url }}` from frontmatter
+2. Switches between these URLs based on current language
+3. Falls back to homepage only if no frontmatter URLs exist
 
-**Solution**: Update the `toggleLanguage()` function to:
-1. Check if current page has `english_url` or `hebrew_url` in frontmatter
-2. Use these URLs for language switching
-3. Only fall back to homepage if no article URLs exist
-
-**Implementation**: After creating articles, update `_includes/theme-script.html` to read page frontmatter variables instead of hardcoded mappings.
+**Critical**: Ensure frontmatter URLs match actual Jekyll permalink structure (no date, no categories unless specifically added).
 
 ### Technical Implementation
 1. **Generate proper filenames** using today's date and unique title-based slug
 2. **Create Jekyll frontmatter** with all required fields
-3. **Set up cross-language URL references** between English and Hebrew versions
+3. **Set up cross-language URL references** using correct permalink structure
 4. **Format content** properly for Jekyll processing (NO title in content)
 5. **Update tags registry** with any new tags used
-6. **Update language toggle script** to use frontmatter URLs
-7. **Commit files** to the retro-on-agileprimero repository
-8. **Verify implementation** - check file structure, frontmatter, and cross-references
+6. **Commit files** to the retro-on-agileprimero repository
+7. **Verify implementation** - check file structure, frontmatter, and cross-references
 
 ### Repository Details
 - **Repository**: `avi-the-coach/retro-on-agileprimero`
@@ -155,6 +166,7 @@ Content continues...
 - **Directory**: `_posts/`
 - **Tags Registry**: `_data/tags.yml`
 - **Site URL**: https://retro.agileprimero.com
+- **Permalink Structure**: `/:categories/:title/` (usually just `/:title/`)
 
 ## Publishing Workflow Summary
 
@@ -163,10 +175,9 @@ Content continues...
 3. **Tag Collection**: Read tags from `_data/tags.yml` registry (NOT from all articles)
 4. **Tag Selection**: Help Avi choose final tags
 5. **Registry Update**: Add new tags to `_data/tags.yml` if needed
-6. **File Creation**: Generate proper Jekyll files with unique slugs and frontmatter
-7. **Language Toggle Fix**: Update theme-script.html to use frontmatter URLs
-8. **Repository Commit**: Upload files to GitHub
-9. **Verification**: Confirm proper structure and cross-references
+6. **File Creation**: Generate proper Jekyll files with unique slugs and correct frontmatter URLs
+7. **Repository Commit**: Upload files to GitHub
+8. **Verification**: Confirm proper structure and cross-references
 
 ## Success Criteria
 
@@ -176,7 +187,8 @@ Content continues...
 - Tags are relevant and consistent across language versions
 - **NO duplicate titles** (only in frontmatter, not in content)
 - Files are properly formatted with unique slugs to avoid conflicts
-- **Language switching works correctly** using frontmatter URLs
+- **Language switching works correctly** using proper permalink structure
+- **Frontmatter URLs match Jekyll permalink structure** (no date, no categories)
 - Tags registry is updated with new tags
 - Articles appear correctly on the live site
 
