@@ -4,8 +4,9 @@ title: "Why Organizational Agility is Critical in the AI Era"
 lang: en
 date: 2025-01-12
 categories: [en, articles]
+permalink: /en/articles/organizational-agility-ai-era-en/
 excerpt: "In the rapidly evolving AI landscape, organizational agility isn't just an advantage—it's a survival necessity. This article explores why traditional organizational structures fail in the AI era and how agility becomes the key differentiator."
-english_url: /en/articles/why-organizational-agility-is-critical-in-the-ai-era/
+english_url: /en/articles/organizational-agility-ai-era-en/
 hebrew_url: /ai-transformation/organizational-change/organizational-agility-ai-era-he/
 tags: [agility, ai, organizational-change, adaptation, future-of-work]
 ---
