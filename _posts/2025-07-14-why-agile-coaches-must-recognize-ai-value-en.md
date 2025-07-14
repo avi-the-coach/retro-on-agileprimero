@@ -4,11 +4,9 @@ title: "Why Agile Coaches Must Recognize the Value of AI - Now!"
 date: 2025-07-14
 lang: en
 tags: [ai, agility, transformation, adaptation, coaching, ai-integration, skill-development]
-english_url: /2025/07/14/why-agile-coaches-must-recognize-ai-value-en/
-hebrew_url: /2025/07/14/why-agile-coaches-must-recognize-ai-value-he/
+english_url: /why-agile-coaches-must-recognize-ai-value-en/
+hebrew_url: /why-agile-coaches-must-recognize-ai-value-he/
 ---
-
-# Why Agile Coaches Must Recognize the Value of AI - Now!
 
 ## Introduction
 
