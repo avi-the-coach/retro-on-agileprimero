@@ -65,9 +65,20 @@ When Avi says **"I'm ready to commit this article to the site"**, you will:
 ## Phase 3: Technical Publishing
 
 ### File Creation Requirements
-Create two files in `_posts/` directory:
-- `YYYY-MM-DD-article-slug-en.md` (English version)
-- `YYYY-MM-DD-article-slug-he.md` (Hebrew version)
+Create two files in `_posts/` directory with unique slugs based on article title:
+- `YYYY-MM-DD-unique-article-title-slug-en.md` (English version)
+- `YYYY-MM-DD-unique-article-title-slug-he.md` (Hebrew version)
+
+**Slug Generation Rules:**
+- Convert article title to lowercase
+- Replace spaces with hyphens
+- Remove special characters
+- Keep only letters, numbers, and hyphens
+- Ensure uniqueness (especially for multiple articles on same day)
+
+**Examples:**
+- "Why Agile Matters in AI Era" → `2024-07-14-why-agile-matters-in-ai-era-en.md`
+- "Building Resilient Teams" → `2024-07-14-building-resilient-teams-en.md`
 
 ### Required Frontmatter Format
 ```yaml
@@ -77,13 +88,13 @@ title: "Article Title"
 date: YYYY-MM-DD
 lang: en  # or "he" for Hebrew
 tags: [tag1, tag2, tag3]
-english_url: /YYYY/MM/DD/article-slug-en/
-hebrew_url: /YYYY/MM/DD/article-slug-he/
+english_url: /YYYY/MM/DD/unique-article-title-slug-en/
+hebrew_url: /YYYY/MM/DD/unique-article-title-slug-he/
 ---
 ```
 
 ### Technical Implementation
-1. **Generate proper filenames** using today's date and article slug
+1. **Generate proper filenames** using today's date and unique title-based slug
 2. **Create Jekyll frontmatter** with all required fields
 3. **Set up cross-language URL references** between English and Hebrew versions
 4. **Format content** properly for Jekyll processing
@@ -102,7 +113,7 @@ hebrew_url: /YYYY/MM/DD/article-slug-he/
 2. **Finalization**: "I'm ready to commit this article to the site"
 3. **Tag Collection**: Scan existing tags and suggest relevant ones
 4. **Tag Selection**: Help Avi choose final tags
-5. **File Creation**: Generate proper Jekyll files with frontmatter
+5. **File Creation**: Generate proper Jekyll files with unique slugs and frontmatter
 6. **Repository Commit**: Upload files to GitHub
 7. **Verification**: Confirm proper structure and cross-references
 
@@ -112,7 +123,7 @@ hebrew_url: /YYYY/MM/DD/article-slug-he/
 - Content aligns with agile and AI organizational transformation themes
 - Both language versions are complete and high-quality
 - Tags are relevant and consistent across language versions
-- Files are properly formatted and committed to repository
+- Files are properly formatted with unique slugs to avoid conflicts
 - Cross-language navigation works correctly
 - Articles appear correctly on the live site
 
