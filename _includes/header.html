@@ -7,6 +7,11 @@
         </div>
     </div>
     <div class="controls">
+        {% if page.layout == 'post' %}
+            <a href="{{ '/' | relative_url }}" id="home-btn">
+                {% if page.lang == 'he' %}בית{% else %}Home{% endif %}
+            </a>
+        {% endif %}
         <button id="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()"></button>
         <button id="language-toggle" aria-label="Toggle language" onclick="toggleLanguage()"></button>
     </div>
