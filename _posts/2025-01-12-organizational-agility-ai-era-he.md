@@ -6,7 +6,7 @@ date: 2025-01-12
 categories: [ai-transformation, organizational-change]
 permalink: /ai-transformation/organizational-change/organizational-agility-ai-era-he/
 excerpt: "בנוף המתפתח במהירות של AI, זריזות ארגונית אינכה רק יתרון - היא הכרח הישרדות."
-english_url: /en/articles/why-organizational-agility-is-critical-in-the-ai-era/
+english_url: /en/articles/organizational-agility-ai-era-en/
 hebrew_url: /ai-transformation/organizational-change/organizational-agility-ai-era-he/
 tags: [agility, ai, organizational-change, adaptation, future-of-work]
 ---
