@@ -8,7 +8,7 @@
     </div>
     <div class="controls">
         {% if page.layout == 'post' %}
-            <a href="{{ '/' | relative_url }}" id="home-btn">
+            <a href="{% if page.lang == 'en' %}{{ '/en/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}" id="home-btn">
                 {% if page.lang == 'he' %}בית{% else %}Home{% endif %}
             </a>
         {% endif %}
