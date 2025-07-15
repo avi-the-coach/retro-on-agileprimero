@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.default_lang }}" data-theme="dark" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.english_url %}data-english-url="{{ page.english_url }}"{% endif %} {% if page.hebrew_url %}data-hebrew-url="{{ page.hebrew_url }}"{% endif %} {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
+<html lang="{{ page.lang | default: site.default_lang }}" data-lang="{{ page.lang | default: site.default_lang }}" {% if page.english_url %}data-english-url="{{ page.english_url }}"{% endif %} {% if page.hebrew_url %}data-hebrew-url="{{ page.hebrew_url }}"{% endif %} {% if page.lang == 'he' or site.default_lang == 'he' %}dir="rtl"{% else %}dir="ltr"{% endif %}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    
+    <!-- CRITICAL: Prevent theme flash by detecting theme before page renders -->
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const html = document.documentElement;
+            
+            if (savedTheme === 'light') {
+                html.setAttribute('data-theme', 'light');
+            } else {
+                html.removeAttribute('data-theme'); // Dark theme is default
+            }
+        })();
+    </script>
     
     <!-- CSS -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v=24">
@@ -34,12 +48,9 @@
             const savedTheme = localStorage.getItem('theme');
             const currentPageLang = '{{ page.lang | default: site.default_lang }}';
             
-            // Apply saved theme
-            if (savedTheme === 'light') {
-                html.setAttribute('data-theme', 'light');
-            } else {
-                html.removeAttribute('data-theme'); // Dark theme default
-            }
+            // Theme should already be set by the inline script in head
+            // This is just for logo update and consistency
+            updateLogo();
             
             // Respect page language instead of overriding with localStorage
             html.setAttribute('data-lang', currentPageLang);
@@ -48,9 +59,6 @@
             } else {
                 html.setAttribute('dir', 'ltr');
             }
-            
-            // Update logo
-            updateLogo();
         });
     </script>
 </body>
