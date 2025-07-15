@@ -3,6 +3,7 @@ layout: post
 title: "Good Communication - The Secret Superpower of Successful Teams"
 date: 2025-07-15
 lang: en
+permalink: /good-communication-secret-superpower-teams-en/
 tags: [communication, collaboration, team-dynamics, feedback, performance]
 english_url: /good-communication-secret-superpower-teams-en/
 hebrew_url: /good-communication-secret-superpower-teams-he/
