@@ -18,7 +18,7 @@
 
 ### ובכל זאת הכל עוד בחיתולים ובעיקר מחפש כיוון
 
-הטכנולוגיה יוצאת בקצב של יום רודף יום. כלים, מודלים ויכולות חדשות מופיעים מידי יום. בצד הזה, [רק 1% מהמנהלים מתארים את הפריסה של ה-AI הגנרטיבי שלהם כ"בוגרת"](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work)<sup>2</sup>. זה אומר שכמעט כל הארגונים עוד בתהליך של נסיונות וטעיות.
+[מחקר אחר של McKinsey](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work)<sup>2</sup> מצא שבעוד כמעט כל החברות משקיעות ב-AI, רק 1 אחוז מאמינות שהן נמצאות ברמת בגרות ושהמכשול הגדול ביותר להתקדמות ווהתרחבות אינו רמת בשטח - אלא המנהיגי האירגון, שאינם מנווטים את המהפכה.
 
 מצד שני, לקוחות מזהים פוטנציאל ומוכנים לשנות תכניות מיידית. אפילו תכניות חשובות שתוכננו מראש - לקוחות מוכנים להסיט משאבים לפרויקטי AI לא מתוכננים. ברמה האסטרטגית, ארגונים שמים למטרה להגיע ליכולות AI עוד השנה ועושים מאמצים אינטנסיביים להגיע לשם.
 
