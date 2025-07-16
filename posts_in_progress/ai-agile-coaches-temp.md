@@ -18,7 +18,7 @@
 
 ### ובכל זאת הכל עוד בחיתולים ובעיקר מחפש כיוון
 
-[מחקר אחר של McKinsey](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work)<sup>2</sup> מצא שבעוד כמעט כל החברות משקיעות ב-AI, רק 1 אחוז מאמינות שהן נמצאות ברמת בגרות ושהמכשול הגדול ביותר להתקדמות והתרחבות אינו רמת בשטח - אלא המנהיגי האירגון, שאינם מנווטים את המהפכה.
+[מחקר אחר של McKinsey](https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/superagency-in-the-workplace-empowering-people-to-unlock-ais-full-potential-at-work)<sup>2</sup> מצא שבעוד כמעט כל החברות משקיעות ב-AI, רק 1 אחוז מאמינות שהן נמצאות ברמת בגרות ושהמכשול הגדול ביותר להתקדמות והתרחבות אינו רמת השטח - אלא מנהיגי האירגון, שאינם מנווטים את המהפכה.
 
 מצד שני, לקוחות מזהים פוטנציאל ומוכנים לשנות תכניות מיידית. אפילו תכניות חשובות שתוכננו מראש - לקוחות מוכנים להסיט משאבים לפרויקטי AI לא מתוכננים. ברמה האסטרטגית, ארגונים שמים למטרה להגיע ליכולות AI עוד השנה ועושים מאמצים אינטנסיביים להגיע לשם.
 
