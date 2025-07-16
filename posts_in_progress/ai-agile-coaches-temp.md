@@ -5,7 +5,7 @@
 
 ## הרגע ההיסטורי בפתח
 
-אחרי 25 שנה מאז שחבורת המניפסטו של הפיתוח האג'יילי ([Agile Manifesto](https://agilemanifesto.org/)) 
+אחרי 25 שנה מאז שחבורת המניפסטו של הפיתוח האג'יילי ({:target="_blank"}[Agile Manifesto](https://agilemanifesto.org/)) 
 (<a href="https://agilemanifesto.org/" target="_blank">Agile Manifesto</a>)
 הטביעה את חותמה, אנחנו עדים לרגע שבו כל מה שעשינו עד עכשיו נראה כמו הכנה לזמן האמת. עידן ה-AI לא רק מחדד את הצורך באג'ייל - הוא הופך אותו לדרישה קיומית.
 
